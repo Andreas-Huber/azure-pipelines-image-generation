@@ -21,6 +21,6 @@ $fileVersion
 }
 else
 {
-	Write-Host "Google Chrome is not isntalled."
+	Write-Host "Google Chrome is not installed."
     exit 1
 }

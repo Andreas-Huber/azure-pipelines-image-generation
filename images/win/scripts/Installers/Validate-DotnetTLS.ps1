@@ -22,8 +22,7 @@ $version = "1.2";
 
 $Description = @"
 _Version:_ $version<br/>
-_Environment:_
-* PATH: contains location of tls1.2
+_Description:_ .NET has been configured to use TLS 1.2 by default
 "@
 
 Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $Description

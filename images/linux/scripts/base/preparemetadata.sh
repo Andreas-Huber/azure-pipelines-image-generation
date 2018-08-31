@@ -8,5 +8,5 @@
 
 source $HELPER_SCRIPTS/document.sh
 
-AddTitle "Linux Image (Ubuntu 16.04)"
+AddTitle "Linux Image ($(lsb_release -ds))"
 AddSubTitle "What's on this image"

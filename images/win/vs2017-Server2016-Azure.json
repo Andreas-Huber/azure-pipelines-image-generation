@@ -64,10 +64,16 @@
         {
             "type": "windows-shell",
             "inline": [
-                "net user {{user `install_user`}} {{user `install_password`}} /add /passwordchg:no /passwordreq:yes /active:yes" ,
+                "net user {{user `install_user`}} {{user `install_password`}} /add /passwordchg:no /passwordreq:yes /active:yes /Y" ,
                 "net localgroup Administrators {{user `install_user`}} /add",
                 "winrm set winrm/config/service/auth @{Basic=\"true\"}",
                 "winrm get winrm/config/service/auth"
+            ]
+        },
+        {
+            "type": "powershell",
+            "inline": [
+                "if (-not ((net localgroup Administrators) -contains '{{user `install_user`}}')) { exit 1 }"
             ]
         },
         {
@@ -509,7 +515,7 @@
         {
             "type": "powershell",
             "inline": [
-                "if( Test-Path $Env:SystemRoot\\windows\\system32\\Sysprep\\unattend.xml ){ rm $Env:SystemRoot\\windows\\system32\\Sysprep\\unattend.xml -Force}",
+                "if( Test-Path $Env:SystemRoot\\System32\\Sysprep\\unattend.xml ){ rm $Env:SystemRoot\\System32\\Sysprep\\unattend.xml -Force}",
                 "& $env:SystemRoot\\System32\\Sysprep\\Sysprep.exe /oobe /generalize /quiet /quit",
                 "while($true) { $imageState = Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\State | Select ImageState; if($imageState.ImageState -ne 'IMAGE_STATE_GENERALIZE_RESEAL_TO_OOBE') { Write-Output $imageState.ImageState; Start-Sleep -s 10  } else { break } }"
             ]

@@ -13,28 +13,28 @@ _Environment:_
 
 ## Docker
 
-_Version:_ 17.06.2-ee-12<br/>
+_Version:_ 17.06.2-ee-16<br/>
 _Environment:_
 * PATH: contains location of docker.exe
 
 ## Docker-compose
 
-_Version:_ 1.21.2<br/>
+_Version:_ 1.22.0<br/>
 _Environment:_
 * PATH: contains location of docker-compose.exe
 
 ## Docker images
 
 The following container images have been cached:
-* microsoft/aspnetcore-build:(sha256:caeea299801aa18cd24da0abec8ee048ec25045402b8a4cd599971c2a3ba1013)
-* microsoft/aspnet:(sha256:3a5a43bede31b21cf4d60eca462b619559939027a2b3606041471897fb2cd822)
-* microsoft/dotnet-framework:(sha256:880e70413da3483e92b958996d709075fe8cc6fd8955590eb868a8e834eb96e4)
-* microsoft/windowsservercore:(sha256:e9ab5f44a62b86174eccd7c1f8ca9570e1f5821aedaff98e7d7f01f844f5bac6)
-* microsoft/nanoserver:(sha256:d3cc51de184f3bdf9262c53077886f78e3fc13282bcfc6daf172df7f47f86806)
+* microsoft/aspnetcore-build:(sha256:9ecc7c5a8a7a11dca5f08c860165646cb30d084606360a3a72b9cbe447241c0c)
+* microsoft/aspnet:(sha256:ebbaf320b4dd0492079490fb83b3788925087987fde955cd5d4c32d82e9ce5f0)
+* microsoft/dotnet-framework:(sha256:11ebb3b67738ce1132a92b55d0558f11d7dd6bb8ccf44caf94d8e90516d36251)
+* microsoft/windowsservercore:(sha256:1abdafc502a7e0d18af4d844c6f88f0b225eb928619b79086e895b95ecc26fdc)
+* microsoft/nanoserver:(sha256:ba322999264cd8ecdfb3fcaec020c7a479ff63e6c4333d89d11d67ecbd96b2b3)
 
 ## Visual Studio 2017 Enterprise
 
-_Version:_ VisualStudio/15.7.2+27703.2018<br/>
+_Version:_ VisualStudio/15.8.1+28010.2003<br/>
 _Location:_ C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise
 
 The following workloads including required and recommended components are installed with Visual Studio 2017:
@@ -113,7 +113,7 @@ In addition the following optional components are installed:
 
 ## SQL Server Data Tools for VS 2017
 
-_Version:_ 15.1.61804.210<br/>
+_Version:_ 15.1.61808.7030<br/>
 
 The following components are installed:
 
@@ -135,12 +135,12 @@ _Version:_ 4.7.03062
 
 ## Azure Service Fabric
 
-_SDK Version:_ 3.1.283.9494<br/>
-_Runtime Version:_ 6.2.283.9494
+_SDK Version:_ 3.2.162.9494<br/>
+_Runtime Version:_ 6.3.162.9494
 
 ## Python (64 bit)
 
-#### Python 3.6.5
+#### Python 3.6.6
 _Environment:_
 * PATH: contains location of python.exe
 
@@ -267,16 +267,26 @@ _Location:_ C:\Modules\azurerm_4.2.1\AzureRM\4.2.1\AzureRM.psd1
 This version is saved but not installed
 _Location:_ C:\Modules\azurerm_5.1.1\AzureRM\5.1.1\AzureRM.psd1
 
+#### 6.7.0
+
+This version is saved but not installed
+_Location:_ C:\Modules\azurerm_6.7.0\AzureRM\6.7.0\AzureRM.psd1
+
 
 ## Azure CLI
 
-_Version:_ 2.0.32<br/>
+_Version:_ 2.0.44<br/>
 _Environment:_
 * PATH: contains location of az.cmd
 
+## Python
+
+_Version:_ 2.7.14 (x86)<br/>_Version:_ 3.4.4 (x86)<br/>_Version:_ 3.5.4 (x86)<br/>_Version:_ 3.6.4 (x86)<br/>_Version:_ 3.7.0 (x86)<br/>_Version:_ 2.7.14 (x64)<br/>_Version:_ 3.4.4 (x64)<br/>_Version:_ 3.5.4 (x64)<br/>_Version:_ 3.6.4 (x64)<br/>_Version:_ 3.7.0 (x64)<br/><br/>
+> Note: These versions of Python are available through the [Use Python Version](https://go.microsoft.com/fwlink/?linkid=871498) task.
+
 ## Git
 
-_Version:_ 2.17.1<br/>
+_Version:_ 2.18.0<br/>
 _Environment:_
 * PATH: contains location of git.exe
 
@@ -322,7 +332,7 @@ _Environment:_
 ## Google Chrome
 
 _version:_
-67.0.3396.62
+68.0.3440.106
 
 ## Mozilla Firefox
 
@@ -335,7 +345,7 @@ _version:_
 #### Chrome Driver
 
 _version:_
-2.35
+2.40
 
 _Environment:_
 * ChromeWebDriver: location of chromedriver.exe
@@ -359,11 +369,11 @@ _Environment:_
 
 ## Node.js
 
-_Version:_ 8.11.2<br/>
+_Version:_ 8.11.4<br/>
 _Environment:_
 * PATH: contains location of node.exe<br/>
 
-> Note: You can install and use another version of Node on the hosted agents using the [Node tool installer](https://docs.microsoft.com/en-us/vsts/build-release/tasks/tool/node-js) task.
+> Note: You can install and use another version of Node.js on Microsoft-hosted agent pools using the [Node tool installer](https://docs.microsoft.com/vsts/pipelines/tasks/tool/node-js) task.
 
 ## npm
 
@@ -373,19 +383,19 @@ _Environment:_
 
 ## Java Development Kit
 
-#### 1.8.0_172
+#### 1.8.0_181
 
 _Environment:_
 * JAVA_HOME: location of JDK
 * PATH: contains bin folder of JDK
 
-#### 1.8.0_172
+#### 1.8.0_181
 
 _Location:_ 
 
-#### 10.0.1
+#### 10.0.2
 
-_Location:_ C:\Program Files\Java\jdk-10.0.1
+_Location:_ C:\Program Files\Java\jdk-10.0.2
 
 ## Ant
 
@@ -397,20 +407,20 @@ _Environment:_
 
 ## Maven
 
-_Version:_ 3.5.3<br/>
+_Version:_ 3.5.4<br/>
 _Environment:_
 * PATH: contains location of mvn.bat
 * M2_HOME: Maven installation root
 
 ## Gradle
 
-_Version:_ 4.7<br/>
+_Version:_ 4.9<br/>
 _Environment:_
 * PATH: contains location of gradle
 
 ## Cmake
 
-_Version:_ 3.11.2<br/>
+_Version:_ 3.12.1<br/>
 _Environment:_
 * PATH: contains location of cmake.exe
 
@@ -426,8 +436,12 @@ _Environment:_
 * PATH: contains location of dotnet.exe
 
 _SDK:_
+* 2.1.400 C:\Program Files\dotnet\sdk\2.1.400
 * 2.1.4 C:\Program Files\dotnet\sdk\2.1.4
+* 2.1.302 C:\Program Files\dotnet\sdk\2.1.302
+* 2.1.301 C:\Program Files\dotnet\sdk\2.1.301
 * 2.1.300 C:\Program Files\dotnet\sdk\2.1.300
+* 2.1.202 C:\Program Files\dotnet\sdk\2.1.202
 * 2.1.201 C:\Program Files\dotnet\sdk\2.1.201
 * 2.1.200 C:\Program Files\dotnet\sdk\2.1.200
 * 2.1.2 C:\Program Files\dotnet\sdk\2.1.2
@@ -444,16 +458,21 @@ _SDK:_
 * 1.1.7 C:\Program Files\dotnet\sdk\1.1.7
 * 1.1.5 C:\Program Files\dotnet\sdk\1.1.5
 * 1.1.4 C:\Program Files\dotnet\sdk\1.1.4
+* 1.1.10 C:\Program Files\dotnet\sdk\1.1.10
 * 1.0.4 C:\Program Files\dotnet\sdk\1.0.4
 * 1.0.1 C:\Program Files\dotnet\sdk\1.0.1
 
 _Runtime:_
+* 2.1.2 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.2
+* 2.1.1 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.1
 * 2.1.0 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.0
+* 2.0.9 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.0.9
 * 2.0.7 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.0.7
 * 2.0.6 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.0.6
 * 2.0.5 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.0.5
 * 2.0.3 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.0.3
 * 2.0.0 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.0.0
+* 1.1.9 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.1.9
 * 1.1.8 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.1.8
 * 1.1.7 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.1.7
 * 1.1.6 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.1.6
@@ -466,6 +485,7 @@ _Runtime:_
 * 1.0.7 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.0.7
 * 1.0.5 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.0.5
 * 1.0.4 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.0.4
+* 1.0.12 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.0.12
 * 1.0.11 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.0.11
 * 1.0.10 C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.0.10
 
@@ -478,8 +498,7 @@ _Environment:_
 ## TLS12
 
 _Version:_ 1.2<br/>
-_Environment:_
-* PATH: contains location of tls1.2
+_Description:_ .NET has been configured to use TLS 1.2 by default
 
 ## MinGW
 
@@ -489,11 +508,11 @@ _Environment:_
 
 ## TypeScript
 
-_Version:_ Version 2.8.4<br/>
+_Version:_ Version 3.0.1<br/>
 
 ## Miniconda
 
-_Version:_ conda 4.5.1<br/>
+_Version:_ conda 4.5.4<br/>
 _Environment:_
 * CONDA: contains location of the root of the Miniconda installation
 

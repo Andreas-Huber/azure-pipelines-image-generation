@@ -30,3 +30,4 @@ npm install -g gulp-cli
 npm install -g grunt-cli
 npm install -g bower
 npm install -g cordova
+npm install -g yarn

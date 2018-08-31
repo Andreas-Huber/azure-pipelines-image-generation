@@ -17,6 +17,9 @@ $ArgumentList = ('/install', '/quiet', '/norestart' )
 $exitCode = Install-EXE -Url $InstallerURI -Name $InstallerName -ArgumentList $ArgumentList
 if ($exitCode -eq 0 -or $exitCode -eq 3010)
 {
+    # MySQL disabled TLS 1.0 support on or about Jul-14-2018.  Need to make sure TLS 1.2 is enabled.
+    [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
+
     # Get the latest mysql command line tools .
     Invoke-WebRequest -UseBasicParsing -Uri $uri -OutFile mysql.zip
 

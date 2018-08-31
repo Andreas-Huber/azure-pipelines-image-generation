@@ -6,11 +6,11 @@
 ################################################################################
 
 function WriteItem {
-    if [ -z $METADATA_FILE ]; then
+    if [ -z "$METADATA_FILE" ]; then
         echo "METADATA_FILE environment variable must be set to output to Metadata Document!"
-        return -1;
+        return 1;
     else
-        echo -e "$1" >> $METADATA_FILE
+        echo -e "$1" >> "$METADATA_FILE"
     fi
 }
 
@@ -24,4 +24,8 @@ function AddSubTitle {
 
 function DocumentInstalledItem {
     WriteItem "- $1"
+}
+
+function DocumentInstalledItemIndent {
+    WriteItem "  - $1"
 }

@@ -11,6 +11,13 @@ New-Item -Path $temp_install_dir -ItemType Directory -Force
 
 Install-MSI -MsiUrl "https://seleniumwebdrivers.blob.core.windows.net/knownchromeversion/googlechromestandaloneenterprise64.msi" -MsiName "googlechromestandaloneenterprise64.msi"
 
+New-NetFirewallRule -DisplayName "BlockGoogleUpdate" -Direction Outbound -Action Block -Program "C:\Program Files (x86)\Google\Update\GoogleUpdate.exe"
+
+Stop-Service -Name gupdate -Force
+Set-Service -Name gupdate -StartupType "Disabled"
+Stop-Service -Name gupdatem -Force
+Set-Service -Name gupdatem -StartupType "Disabled"
+
 New-Item -Path "HKLM:\SOFTWARE\Policies\Google\Update" -Force
 New-ItemProperty "HKLM:\SOFTWARE\Policies\Google\Update" -Name "AutoUpdateCheckPeriodMinutes" -Value 00000000 -Force
 New-ItemProperty "HKLM:\SOFTWARE\Policies\Google\Update" -Name "UpdateDefault" -Value 00000000 -Force

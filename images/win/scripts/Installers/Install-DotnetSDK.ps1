@@ -8,6 +8,8 @@
 # ensure temp
 New-Item -Path C:\Temp -Force -ItemType Directory
 
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
+
 Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/dotnet/core/master/release-notes/releases.json' -UseBasicParsing -OutFile 'dotnet-releases.json'
 $dotnetReleases = Get-Content -Path 'dotnet-releases.json' | ConvertFrom-Json
 $dotnetReleases = $dotnetReleases | Sort-Object -Property 'version-runtime'

@@ -10,7 +10,6 @@ choco install jdk8 -params "both=true" -y
 choco install jdk9 -y
 choco install jdk10 -y
 choco install ant -y
-choco install cobertura -y
 choco install maven -y
 choco install gradle -y
 
@@ -63,3 +62,21 @@ setx M2 $m2 /M
 setx M2_HOME $m2_home /M
 setx M2_REPO $m2_repo /M
 setx MAVEN_OPTS $maven_opts /M
+
+
+
+## Downloading cobertura jars
+$uri = 'https://ayera.dl.sourceforge.net/project/cobertura/cobertura/2.1.1/cobertura-2.1.1-bin.zip'
+$coberturaPath = "C:\cobertura-2.1.1"
+
+cd $env:TEMP
+
+Invoke-WebRequest -UseBasicParsing -Uri $uri -OutFile cobertura.zip
+
+# Expand the zip
+Expand-Archive -Path cobertura.zip -DestinationPath "C:\" -Force
+
+# Deleting zip folder
+Remove-Item -Recurse -Force cobertura.zip
+
+setx COBERTURA_HOME $coberturaPath /M

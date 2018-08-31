@@ -4,8 +4,12 @@
 ##  Desc:  Install Mozilla Firefox
 ################################################################################
 
-$version = "58.0.2"
-choco install firefox --version $version
+Import-Module -Name ImageHelpers -Force
+
+$temp_install_dir = 'C:\Windows\Installer'
+New-Item -Path $temp_install_dir -ItemType Directory -Force
+
+Install-EXE -Url "https://seleniumwebdrivers.blob.core.windows.net/knownfirefoxversion/FirefoxSetup.exe" -Name "FirefoxSetup.exe" -ArgumentList "-ms"
 
 $path = '{0}\Program Files\Mozilla Firefox\' -f $env:SystemDrive;
 New-Item -path $path -Name 'mozilla.cfg' -Value '//

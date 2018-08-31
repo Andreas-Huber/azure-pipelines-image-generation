@@ -48,6 +48,7 @@ Push-Location -Path $sdk.FullName
 
 & '.\tools\bin\sdkmanager.bat' --sdk_root=$sdk_root `
     "platform-tools" `
+    "platforms;android-28" `
     "platforms;android-27" `
     "platforms;android-26" `
     "platforms;android-25" `
@@ -59,6 +60,7 @@ Push-Location -Path $sdk.FullName
     "platforms;android-17" `
     "platforms;android-15" `
     "platforms;android-10" `
+    "build-tools;28.0.0" `
     "build-tools;27.0.3" `
     "build-tools;27.0.1" `
     "build-tools;26.0.3" `
