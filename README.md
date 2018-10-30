@@ -1,14 +1,17 @@
-# Visual Studio Team Services Hosted Images
+# Azure Pipelines Hosted Images
 ![Banner](/docs/resources/ImageGenBanner.png "Banner")
 
 ## Overview
 
-This repo contains the scripts and instructions to generate the images used for the VSTS hosted pool images.  Specifically for Hosted VS2017, VS2015 and Linux.
+This repo contains the scripts and instructions to generate the images used for the Azure Pipelines hosted pool images.  Specifically for Hosted VS2017, VS2015 and Ubuntu.
 
 
 # Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+This project welcomes contributions and suggestions.
+See the [contribution process](.github/CONTRIBUTING.md) to get started.
+
+Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.microsoft.com.
 
@@ -22,11 +25,9 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Issues and Requests
 
-If you have an issue with one of the images or you have a request to add or change a tool on one of our images:
+If you have an issue with one of the images, please create an issue in this repo.
 
-  1.  Create an issue in this repo
-  2.  Wait for approval or comments.  Our images have real constraints.  Primarily, disk space.  So it's a value (broad adoption of that tool) vs. cost (disk space and on-going maintenance) proposition.  Specify whether you will create a PR or if you are requesting for us to add it to the image.
-  3.  Optionally, create a PR.
+To add or change a tool on one of our images, see our [contribution process](.github/CONTRIBUTING.md).
 
 ## Generating Images
 

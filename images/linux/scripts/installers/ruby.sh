@@ -5,7 +5,7 @@
 ##  Desc:  Installs Ruby requirements
 ################################################################################
 
-## Source the helpers for use with the script
+# Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
 
 # Install Ruby requirements

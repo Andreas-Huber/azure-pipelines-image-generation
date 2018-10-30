@@ -8,21 +8,83 @@
 source $HELPER_SCRIPTS/apt.sh
 source $HELPER_SCRIPTS/document.sh
 
-DOTNET_PACKAGE=dotnet-sdk-2.1
+LATEST_DOTNET_PACKAGE=dotnet-sdk-2.1
 
 LSB_RELEASE=$(lsb_release -rs)
 
-echo "Determing if .NET Core ($DOTNET_PACKAGE) is installed"
-if ! IsInstalled $DOTNET_PACKAGE; then
-    echo "Could not find .NET Core ($DOTNET_PACKAGE), installing..."
-    apt-get install $DOTNET_PACKAGE -y
+mksamples()
+{
+    sdk=$1
+    sample=$2
+    mkdir "$sdk"
+    cd "$sdk" || exit
+    set -e
+    dotnet help
+    dotnet new globaljson --sdk-version "$sdk"
+    dotnet new "$sample"
+    dotnet restore
+    dotnet build
+    set +e
+    cd .. || exit
+    rm -rf "$sdk"
+}
+
+set -e
+
+echo "Determing if .NET Core ($LATEST_DOTNET_PACKAGE) is installed"
+if ! IsInstalled $LATEST_DOTNET_PACKAGE; then
+    echo "Could not find .NET Core ($LATEST_DOTNET_PACKAGE), installing..."
+    apt-get install $LATEST_DOTNET_PACKAGE -y
 else
-    echo ".NET Core ($DOTNET_PACKAGE) is already installed"
+    echo ".NET Core ($LATEST_DOTNET_PACKAGE) is already installed"
 fi
 
-echo "Testing .NET Core ($DOTNET_PACKAGE)"
-echo "Pulling down initial dependencies"
-dotnet help
+# Get list of all released SDKs
+release_url="https://raw.githubusercontent.com/dotnet/core/master/release-notes/releases.json"
+releases=$(curl "${release_url}")
+sdks=$(echo "${releases}" | grep version-sdk | grep -v preview | grep -v rc | grep -v display | cut -d\" -f4 | sort -u)
+for sdk in $sdks; do
+    # Glob matches dotnet-dev-1.x or dotnet-sdk-2.y
+    if ! apt-get install -y --no-install-recommends "dotnet-*-$sdk"; then
+        # Install manually if not in package repo
+        if [[ "$sdk" =~ ^1.*$ ]]; then
+            url="https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$sdk/dotnet-dev-ubuntu.16.04-x64.$sdk.tar.gz"
+        else
+            url="https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$sdk/dotnet-sdk-$sdk-linux-x64.tar.gz"
+        fi
+        echo "$url" >> urls
+        echo "Adding $url to list to download later"
+    fi
+done
 
-echo "Documenting .NET Core ($DOTNET_PACKAGE)"
-DocumentInstalledItem ".NET Core SDKs $(dotnet --list-sdks)"
+# Download additional SDKs
+echo "Downloading release tarballs..."
+sort -u urls | xargs -n 1 -P 16 wget -q
+for tarball in *.tar.gz; do
+    dest="./tmp-$(basename -s .tar.gz $tarball)"
+    echo "Extracting $tarball to $dest"
+    mkdir "$dest" && tar -C "$dest" -xzf "$tarball"
+    rsync -qav "$dest/shared/" /usr/share/dotnet/shared/
+    rsync -qav "$dest/host/" /usr/share/dotnet/host/
+    rsync -qav "$dest/sdk/" /usr/share/dotnet/sdk/
+    rm -rf "$dest"
+    rm "$tarball"
+done
+rm urls
+
+# Smoke test each SDK
+for sdk in $sdks; do
+    mksamples "$sdk" "console"
+    mksamples "$sdk" "mstest"
+    mksamples "$sdk" "xunit"
+    mksamples "$sdk" "web"
+    mksamples "$sdk" "mvc"
+    mksamples "$sdk" "webapi"
+    DocumentInstalledItem ".NET Core SDK $sdk"
+done
+
+# NuGetFallbackFolder at /usr/share/dotnet/sdk/NuGetFallbackFolder is warmed up by smoke test
+# Additional FTE will just copy to ~/.dotnet/NuGet which provides no benefit on a fungible machine
+echo "DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1" | tee -a /etc/environment
+
+dotnet --info

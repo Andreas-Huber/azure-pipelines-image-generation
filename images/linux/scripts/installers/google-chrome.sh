@@ -5,7 +5,7 @@
 ##  Desc:  Installs google-chrome
 ################################################################################
 
-## Source the helpers for use with the script
+# Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
 
 LSB_RELEASE=$(lsb_release -rs)
@@ -16,13 +16,13 @@ apt-get update
 apt-get install -y google-chrome-stable
 echo "CHROME_BIN=/usr/bin/google-chrome" | tee -a /etc/environment
 
-## Run tests to determine that the software installed as expected
+# Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"
 if ! command -v google-chrome; then
     echo "google-chrome was not installed"
     exit 1
 fi
 
-## Document what was added to the image
+# Document what was added to the image
 echo "Lastly, documenting what we added to the metadata file"
 DocumentInstalledItem "Google Chrome ($(google-chrome --version))"

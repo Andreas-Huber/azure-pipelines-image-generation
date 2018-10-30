@@ -21,9 +21,6 @@ echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWOR
 apt-get install -y mysql-server
 
 # Install MS SQL Server client tools (https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-2017)
-# curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-# curl "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list" | tee /etc/apt/sources.list.d/msprod.list
-# apt-get update
 apt-get install -y mssql-tools unixodbc-dev
 apt-get -f install
 ln -s /opt/mssql-tools/bin/* /usr/local/bin/
@@ -35,8 +32,13 @@ if ! command -v mysql; then
     exit 1
 fi
 
+set -e
+mysql -vvv -e 'CREATE DATABASE smoke_test' -uroot -proot
+mysql -vvv -e 'DROP DATABASE smoke_test' -uroot -proot
+set +e
+
 # Document what was added to the image
 echo "Lastly, documenting what we added to the metadata file"
 DocumentInstalledItem "MySQL ($(mysql --version))"
-DocumentInstalledItem "MySQL Server"
+DocumentInstalledItem "MySQL Server (user:root password:root)"
 DocumentInstalledItem "MS SQL Server Client Tools"

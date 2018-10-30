@@ -8,10 +8,10 @@
 
 Set-PSRepository -InstallationPolicy Trusted -Name PSGallery
 Write-Host "Install-Module DockerProvider"
-Install-Module DockerProvider -Force
+Install-Module DockerMsftProvider -Force
 
 Write-Host "Install-Package Docker"
-Install-Package Docker -ProviderName DockerProvider -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.03 -Force
 Start-Service docker
 
 choco install docker-compose -y

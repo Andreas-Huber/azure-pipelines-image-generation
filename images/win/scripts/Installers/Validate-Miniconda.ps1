@@ -1,3 +1,9 @@
+################################################################################
+##  File:  Validate-Miniconda.ps1
+##  Team:  CI-X
+##  Desc:  Validate Miniconda
+################################################################################
+
 if ($env:CONDA)
 {
     Write-Host "The CONDA environment variable is set"

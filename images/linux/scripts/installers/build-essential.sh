@@ -5,13 +5,13 @@
 ##  Desc:  Installs build-essential package
 ################################################################################
 
-## Source the helpers for use with the script
+# Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
 source $HELPER_SCRIPTS/apt.sh
 
 PACKAGE=build-essential
 
-## Test to see if the software in question is already installed, if not install it
+# Test to see if the software in question is already installed, if not install it
 echo "Checking to see if the installer script has already been run"
 if ! IsInstalled $PACKAGE; then
     echo "Installing $PACKAGE"
@@ -20,6 +20,6 @@ else
     echo "$PACKAGE is already installed"
 fi
 
-## Document what was added to the image
+# Document what was added to the image
 echo "Lastly, documenting what we added to the metadata file"
 DocumentInstalledItem "$PACKAGE"

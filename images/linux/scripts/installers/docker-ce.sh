@@ -27,7 +27,7 @@ else
     echo "Docker ($docker_package) is already installed"
 fi
 
-## Run tests to determine that the software installed as expected
+# Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"
 if ! command -v docker; then
     echo "docker was not installed"

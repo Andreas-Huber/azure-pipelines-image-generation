@@ -17,65 +17,67 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 - Node.js 6.14.4
 - Node.js 8.11.3
 - NVM 0.33.11
-- PowerShell 6.0.4
+- PowerShell 6.1.0
 - Python 2.7.10
 - Python 3.7.0
 - Ruby 2.5.1p57
-- .NET Core SDK 1.0.1, 1.0.4, 1.1.4, 1.1.5, 1.1.7, 1.1.8, 1.1.9, 2.0.0, 2.0.3, 2.1.100, 2.1.101, 2.1.102, 2.1.103, 2.1.104, 2.1.105, 2.1.2, 2.1.200, 2.1.201, 2.1.300, 2.1.301, 2.1.4, 2.1.400
-- Go 1.10.3
+- .NET Core SDK 1.0.1, 1.0.4, 1.1.4, 1.1.5, 1.1.7, 1.1.8, 1.1.9, 2.0.0, 2.0.3, 2.1.100, 2.1.101, 2.1.102, 2.1.103, 2.1.104, 2.1.105, 2.1.2, 2.1.200, 2.1.201, 2.1.300, 2.1.301, 2.1.4, 2.1.400, 2.1.401 2.1.402
+- Go 1.11
 
 ### Package Management
 
 - Bundler 1.16.1
 - Carthage 0.30.1
 - CocoaPods 1.5.3
-- Homebrew 1.7.1
+- Homebrew 1.7.6
 - NPM 3.10.10
-- Yarn 1.9.4
-- NuGet 4.3.0.4406
+- Yarn 1.10.1
+- NuGet 4.7.0.5148
 - pip 18.0
-- Miniconda 4.5.4
+- Miniconda 4.5.11
 
 ### Project Management
 
 - Apache Maven 3.5.4
-- Gradle 4.9
+- Gradle 4.10.2
 
 ### Utilities
 
 - curl 7.54.0 (libcurl/7.54.0 LibreSSL/2.0.20 zlib/1.2.11 nghttp2/1.24.0)
-- Git 2.18.0
-- Git LFS 2.5.1
+- Git 2.19.0
+- Git LFS 2.5.2
 - GNU Wget 1.19.5
 - Subversion (SVN) 1.10.2
 
 ### Tools
 
-- fastlane 2.102.0
-- App Center CLI 1.1.1
-- Azure-CLI 2.0.44
+- fastlane 2.105.2
+- App Center CLI 1.1.2
+- Azure-CLI 2.0.46
 
 ### Pre-cached tools
 - Python 2.7.15 3.4.8 3.5.5 3.6.5 3.7.0
 
-## Xcode
-
-- Xcode 10 beta
-- Xcode 9.4.1
-- Xcode 9.4
-- Xcode 9.3.1
-- Xcode 9.3
-- Xcode 9.2
-- Xcode 9.1
-- Xcode 9.0.1
-- Xcode 9.0
-- Xcode 8.3.3
-- Xcode 8.3.2
-- Xcode 8.3.1
-- Xcode 8.2.1
-- Xcode 8.2
-- Xcode 8.1
-- Xcode 8.0
+### Xcode
+| Version                | Build   | Path                          |
+|------------------------|---------|-------------------------------|
+| 10.1 beta 1            | 10O23u  | /Applications/Xcode_10.1.app  |
+| 10.0                   | 10A255  | /Applications/Xcode_10.app    |
+| 9.4.1                  | 9F2000  | /Applications/Xcode_9.4.1.app |
+| 9.4                    | 9F1027a | /Applications/Xcode_9.4.app   |
+| 9.3.1                  | 9E501   | /Applications/Xcode_9.3.1.app |
+| 9.3                    | 9E145   | /Applications/Xcode_9.3.app   |
+| 9.2                    | 9C40b   | /Applications/Xcode_9.2.app   |
+| 9.1                    | 9B55    | /Applications/Xcode_9.1.app   |
+| 9.0.1                  | 9A1004  | /Applications/Xcode_9.0.1.app |
+| 9.0                    | 9A235   | /Applications/Xcode_9.app     |
+| 8.3.3                  | 8E3004b | /Applications/Xcode_8.3.3.app |
+| 8.3.2                  | 8E2002  | /Applications/Xcode_8.3.2.app |
+| 8.3.1                  | 8E1000a | /Applications/Xcode_8.3.1.app |
+| 8.2.1                  | 8C1002  | /Applications/Xcode_8.2.1.app |
+| 8.2                    | 8C38    | /Applications/Xcode_8.2.app   |
+| 8.1                    | 8B62    | /Applications/Xcode_8.1.app   |
+| 8.0                    | 8A218a  | /Applications/Xcode_8.app     |
 
 ### Xcode Support Tools
 
@@ -100,6 +102,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | iOS 11.3                  | iphoneos11.3 |
 | iOS 11.4                  | iphoneos11.4 |
 | iOS 12.0                  | iphoneos12.0 |
+| iOS 12.1                  | iphoneos12.1 |
 | iOS Simulator 10.0        | iphonesimulator10.0 |
 | iOS Simulator 10.1        | iphonesimulator10.1 |
 | iOS Simulator 10.2        | iphonesimulator10.2 |
@@ -110,6 +113,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | iOS Simulator 11.3        | iphonesimulator11.3 |
 | iOS Simulator 11.4        | iphonesimulator11.4 |
 | iOS Simulator 12.0        | iphonesimulator12.0 |
+| iOS Simulator 12.1        | iphonesimulator12.1 |
 | tvOS 10.0                 | appletvos10.0 |
 | tvOS 10.1                 | appletvos10.1 |
 | tvOS 10.2                 | appletvos10.2 |
@@ -119,6 +123,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | tvOS 11.3                 | appletvos11.3 |
 | tvOS 11.4                 | appletvos11.4 |
 | tvOS 12.0                 | appletvos12.0 |
+| tvOS 12.1                 | appletvos12.1 |
 | tvOS Simulator 10.0       | appletvsimulator10.0 |
 | tvOS Simulator 10.1       | appletvsimulator10.1 |
 | tvOS Simulator 10.2       | appletvsimulator10.2 |
@@ -128,6 +133,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | tvOS Simulator 11.3       | appletvsimulator11.3 |
 | tvOS Simulator 11.4       | appletvsimulator11.4 |
 | tvOS Simulator 12.0       | appletvsimulator12.0 |
+| tvOS Simulator 12.1       | appletvsimulator12.1 |
 | watchOS 3.0               | watchos3.0 |
 | watchOS 3.1               | watchos3.1 |
 | watchOS 3.2               | watchos3.2 |
@@ -136,6 +142,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | watchOS 4.2               | watchos4.2 |
 | watchOS 4.3               | watchos4.3 |
 | watchOS 5.0               | watchos5.0 |
+| watchOS 5.1               | watchos5.1 |
 | watchOS Simulator 3.0     | watchsimulator3.0 |
 | watchOS Simulator 3.1     | watchsimulator3.1 |
 | watchOS Simulator 3.2     | watchsimulator3.2 |
@@ -144,6 +151,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | watchOS Simulator 4.2     | watchsimulator4.2 |
 | watchOS Simulator 4.3     | watchsimulator4.3 |
 | watchOS Simulator 5.0     | watchsimulator5.0 |
+| watchOS Simulator 5.1     | watchsimulator5.1 |
 
 ### Installed Simulators
 
@@ -162,6 +170,9 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 - iPhone 8 Plus
 - iPhone SE
 - iPhone X
+- iPhone XR
+- iPhone XS
+- iPhone XS Max
 - iPad 2
 - iPad Retina
 - iPad Air
@@ -181,6 +192,8 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 - Apple Watch Series 2 - 42mm
 - Apple Watch Series 3 - 38mm
 - Apple Watch Series 3 - 42mm
+- Apple Watch Series 4 - 40mm
+- Apple Watch Series 4 - 44mm
 
 #### Runtimes
 | OS      | Version |
@@ -353,6 +366,8 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | Apple Watch Series 2 - 42mm | iPhone 7 Plus  |
 | Apple Watch Series 3 - 38mm | iPhone 8       |
 | Apple Watch Series 3 - 42mm | iPhone 8 Plus  |
+| Apple Watch Series 4 - 40mm | iPhone XS      |
+| Apple Watch Series 4 - 44mm | iPhone XS Max  |
 
 ## Android
 
@@ -366,7 +381,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 
 | Package name          | Description                                 |
 |-----------------------|---------------------------------------------|
-| platform-tools        | Android SDK Platform-tools, revision 28.0.0 |
+| platform-tools        | Android SDK Platform-tools, revision 28.0.1 |
 
 ### Android SDK Platforms
 
@@ -415,6 +430,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | build-tools-28.0.0    | Android SDK Build-tools, Revision 28.0.0  |
 | build-tools-28.0.1    | Android SDK Build-tools, Revision 28.0.1  |
 | build-tools-28.0.2    | Android SDK Build-tools, Revision 28.0.2  |
+| build-tools-28.0.3    | Android SDK Build-tools, Revision 28.0.3  |
 
 ### Utils
 
@@ -422,7 +438,7 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 |-----------------------|-------------------------------------------|
 | cmake                 | 3.6.4111459                               |
 | lldb                  | 2.3.3614996                               |
-| ndk-bundle            | 17.0.4754217                              |
+| ndk-bundle            | 18.0.5002713                              |
 | ProGuard              | 5.3.3                                     |
 | Android Emulator      | 27.2.9                                    |
 
@@ -442,16 +458,17 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 | extra-android-m2repository        | Android Support Repository, revision 47  |
 | extra-google-google_play_services | Google Play services, revision 49        |
 | extra-google-m2repository         | Google Repository, revision 58           |
-| Hardware_Accelerated_Execution_Manager | Intel x86 Emulator Accelerator 7.2.0     |
+| Hardware_Accelerated_Execution_Manager | Intel x86 Emulator Accelerator 7.3.0     |
 
 ## Xamarin
 
 ### Visual Studio for Mac
 
-- 7.5.2.40
+- 7.6.6.17
 
 ### Mono
 
+- 5.12.0
 - 5.10.1
 - 5.8.1
 - 5.8.0
@@ -463,6 +480,9 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 
 ### Xamarin.iOS SDK
 
+- 12.0.0.15
+- 12.0.0.10
+- 11.14.0.13
 - 11.12.0.4
 - 11.9.1.24
 - 11.8.0.20
@@ -474,6 +494,8 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 
 ### Xamarin.Android SDK
 
+- 9.0.0-20
+- 9.0.0-18
 - 8.3.3-2
 - 8.2.0-16
 - 8.2.0-15
@@ -485,6 +507,8 @@ The following software is installed on machines in the VSTS **Hosted macOS Previ
 
 ### Xamarin.Mac SDK
 
+- 4.99.3.740
+- 4.6.0.13
 - 4.4.1.193
 - 4.2.1.28
 - 4.2.0.20

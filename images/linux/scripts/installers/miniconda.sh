@@ -5,7 +5,7 @@
 ##  Desc:  Installs miniconda
 ################################################################################
 
-## Source the helpers for use with the script
+# Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
 
 # Install Miniconda
@@ -19,6 +19,6 @@ echo "CONDA=$CONDA" | tee -a /etc/environment
 
 ln -s $CONDA/bin/conda /usr/bin/conda
 
-## Document what was added to the image
+# Document what was added to the image
 echo "Lastly, documenting what we added to the metadata file"
 DocumentInstalledItem "Miniconda ($($CONDA/bin/conda --version))"

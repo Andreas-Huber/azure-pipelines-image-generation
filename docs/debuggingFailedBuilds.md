@@ -14,12 +14,12 @@ At the beginning of the build log (written to console), find the resource group 
 
 ![Resource group from log screenshot](/docs/resources/resourceGroupName.png "Resource group from log screenshot")
 
-Log into the Azure Portal.  Find that resource group under "Resource groups."  You should see the resources for the Packer build:
+Log into the Azure Portal.  Find that resource group under `Resource groups`.  You should see the resources for the Packer build:
 
 ![Packer resource group in Azure screenshot](/docs/resources/packerResourceGroup.png "Packer resource group in Azure screenshot")
 
 ## Step 3: Connect to the VM
-Select the VM in the resource group.  Click "Connect:"
+Select the VM in the resource group.  Click `Connect:`
 
 This will download an RDP file.  Open that and enter the credentials found in the JSON file you pass to `packer build`:
 

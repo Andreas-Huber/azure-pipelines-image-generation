@@ -33,6 +33,7 @@
             "managed_image_resource_group_name": "{{user `resource_group`}}",
             "managed_image_name": "{{user `image_name`}}",
 
+            "os_disk_size_gb": "256",
             "location": "{{user `location`}}",
             "vm_size": "{{user `vm_size`}}",
 
@@ -144,7 +145,8 @@
                 "{{ template_dir }}/scripts/Installers/Vs2017/Install-SSDT.ps1"
             ],
             "elevated_user": "{{user `install_user`}}",
-            "elevated_password": "{{user `install_password`}}"
+            "elevated_password": "{{user `install_password`}}",
+            "pause_before": "120s"
         },
         {
             "type": "windows-restart",
@@ -361,6 +363,30 @@
             ]
         },
         {
+            "type": "powershell",
+            "scripts":[
+                "{{ template_dir }}/scripts/Installers/Install-7zip.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "scripts":[
+                "{{ template_dir }}/scripts/Installers/Install-Mercurial.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "scripts":[
+                "{{ template_dir }}/scripts/Installers/Install-Jq.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "scripts":[
+                "{{ template_dir }}/scripts/Installers/Install-InnoSetup.ps1"
+            ]
+        },
+        {
             "type": "windows-restart",
             "restart_timeout": "30m"
         },
@@ -488,6 +514,30 @@
             "type": "powershell",
             "scripts":[
                 "{{ template_dir }}/scripts/Installers/Validate-AzureCosmosDbEmulator.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "scripts":[
+                "{{ template_dir }}/scripts/Installers/Validate-7zip.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "scripts":[
+                "{{ template_dir }}/scripts/Installers/Validate-Mercurial.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "scripts":[
+                "{{ template_dir }}/scripts/Installers/Validate-Jq.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "scripts":[
+                "{{ template_dir }}/scripts/Installers/Validate-InnoSetup.ps1"
             ]
         },
         {

@@ -14,7 +14,7 @@ version="1.22.0"
 curl -L "https://github.com/docker/compose/releases/download/$version/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-## Run tests to determine that the software installed as expected
+# Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"
 if ! command -v docker-compose; then
     echo "docker-compose was not installed"

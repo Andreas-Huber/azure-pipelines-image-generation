@@ -5,13 +5,13 @@
 ##  Desc:  Installs hhvm
 ################################################################################
 
-## Source the helpers for use with the script
+# Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
 source $HELPER_SCRIPTS/apt.sh
 
 hhvm_package=hhvm
 
-## Test to see if the software in question is already installed, if not install it
+# Test to see if the software in question is already installed, if not install it
 echo "Checking to see if the installer script has already been run"
 if ! IsInstalled ${hhvm_package}; then
     apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
@@ -22,7 +22,7 @@ else
     echo "${hhvm_package} already installed"
 fi
 
-## Run tests to determine that the software installed as expected
+# Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"
 if ! IsInstalled ${hhvm_package}; then
     echo "${hhvm_package} was not installed"
@@ -33,6 +33,6 @@ if ! command -v hhvm; then
     exit 1
 fi
 
-## Document what was added to the image
+# Document what was added to the image
 echo "Lastly, documenting what we added to the metadata file"
 DocumentInstalledItem "HHVM ($(hhvm --version | head -n 1))"

@@ -5,9 +5,9 @@
 ################################################################################
 
 $SoftwareName = 'Azure CosmosDb Emulator'
-$regKey = 'HKCU:\SOFTWARE\Microsoft\CosmosDBEmulator'
+$regKey = gci HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\* | gp | ? { $_.DisplayName -eq 'Azure Cosmos DB Emulator' }
 
-if (!(Test-Path $regKey))
+if ($regKey -eq $null)
 {
     Write-Host "The $regKey registry key is not set"
     exit 1
@@ -17,7 +17,7 @@ else
     Write-Host "The $regKey registry key is set"
 }
 
-$installDir = (Get-ItemProperty $regKey).'InstallDir'
+$installDir = $regKey.InstallLocation
 if ($installDir -eq $null)
 {
     Write-Host "The $SoftwareName installation directory registry value is not set"
@@ -46,4 +46,3 @@ _Location:_ $installDir
 
     Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $Description
 }
-

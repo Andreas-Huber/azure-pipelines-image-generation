@@ -5,7 +5,7 @@
 ##  Desc:  Installed Azure CLI (az)
 ################################################################################
 
-## Source the helpers for use with the script
+# Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
 
 LSB_CODENAME=$(lsb_release -cs)
@@ -16,12 +16,12 @@ apt-key adv --keyserver packages.microsoft.com --recv-keys B02C46DF417A0893
 apt-get update
 apt-get install -y --no-install-recommends apt-transport-https azure-cli
 
-## Run tests to determine that the software installed as expected
+# Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"
 if ! command -v az; then
     echo "azure-cli was not installed"
     exit 1
 fi
 
-## Document what was added to the image
+# Document what was added to the image
 DocumentInstalledItem "Azure CLI ($(az -v | head -n 1))"

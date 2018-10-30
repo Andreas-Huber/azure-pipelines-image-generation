@@ -5,7 +5,7 @@
 ##  Desc:  Installs erlang
 ################################################################################
 
-## Source the helpers for use with the script
+# Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
 source $HELPER_SCRIPTS/apt.sh
 
@@ -20,7 +20,7 @@ wget -q -O rebar3 https://s3.amazonaws.com/rebar3/rebar3
 chmod +x rebar3
 mv rebar3 /usr/local/bin/rebar3
 
-## Run tests to determine that the software installed as expected
+# Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"
 for cmd in erl erlc rebar3; do
     if ! command -v $cmd; then
@@ -29,7 +29,7 @@ for cmd in erl erlc rebar3; do
     fi
 done
 
-## Document what was added to the image
+# Document what was added to the image
 echo "Lastly, documenting what we added to the metadata file"
-erlang_version="$(erl -version 2>&1 | tr -d '\n')"
+erlang_version="$(erl -version 2>&1 | tr -d '\n' | tr -d '\r')"
 DocumentInstalledItem "Erlang ($erlang_version)"

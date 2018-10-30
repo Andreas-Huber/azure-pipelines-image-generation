@@ -5,7 +5,7 @@
 ##  Desc:  Installs go, configures GOROOT, and adds go to the path
 ################################################################################
 
-## Source the helpers for use with the script
+# Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
 
 # This function installs Go using the specified arguments:

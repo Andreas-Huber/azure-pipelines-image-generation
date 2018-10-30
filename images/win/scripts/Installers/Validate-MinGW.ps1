@@ -1,3 +1,9 @@
+################################################################################
+##  File:  Validate-MinGW.ps1
+##  Team:  CI-X
+##  Desc:  Validate MinGW
+################################################################################
+
 if (Get-Command -Name 'gcc')
 {
     Write-Host "gcc is successfully installed:"

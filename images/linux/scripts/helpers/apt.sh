@@ -13,3 +13,12 @@
 function IsInstalled {
     dpkg -S $1 &> /dev/null
 }
+
+# Configure apt to always assume Y
+echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
+
+# Use apt-fast for parallel downloads
+apt-get install aria2
+add-apt-repository ppa:apt-fast/stable
+apt-get update
+apt-get -y install apt-fast
