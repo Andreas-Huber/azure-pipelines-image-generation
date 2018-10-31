@@ -1,8 +1,8 @@
-# VSTS Hosted image
+# Azure Pipelines Hosted image
 
 Version 2017.10.01
 
-The following software is installed on machines in the VSTS **Hosted** pool.
+The following software is installed on machines in the Azure Pipelines **Hosted** pool.
 
 * Visual Studio
  - Visual Studio 2015 Update 3

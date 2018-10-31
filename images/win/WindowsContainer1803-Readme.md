@@ -1,6 +1,6 @@
-# VSTS Windows Container(1803) image
+# Azure Pipelines Windows Container(1803) image
 
-The following software is installed on machines in the VSTS **Windows Container(1803)** pool.
+The following software is installed on machines in the Azure Pipelines **Windows Container(1803)** pool.
 
 Components marked with **\*** have been upgraded since the previous version of the image.
 

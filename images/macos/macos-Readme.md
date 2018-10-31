@@ -1,6 +1,6 @@
-# VSTS Hosted macOS Preview image
+# Azure Pipelines hosted macOS image
 
-The following software is installed on machines in the VSTS **Hosted macOS Preview** pool.
+The following software is installed on machines in the Azure Pipelines **macOS-10.13** VM image ('Hosted macOS Preview' pool).
 
 ## Operating System
 

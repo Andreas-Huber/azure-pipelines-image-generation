@@ -1,9 +1,8 @@
-# VSTS Hosted VS2017 image
+# Azure Pipelines Hosted VS2017 image
 
-The following software is installed on machines in the VSTS **Hosted VS2017** pool.
+The following software is installed on machines in the Azure Pipelines **Hosted VS2017** pool.
 
 Components marked with **\*** have been upgraded since the previous version of the image.
-
 
 ## Chocolatey
 
