@@ -39,11 +39,19 @@ $npmVersion = $(npm -version)
 
 # Adding description of the software to Markdown
 $SoftwareName = "Node.js"
+$GulpInfo = "Gulp $(gulp -version)"
+$GruntInfo = "Grunt $(grunt -version)"
+$BowerInfo = "Bower $(bower -version)"
+$YarnInfo = "Yarn $(yarn -version)"
 
 $Description = @"
 _Version:_ $nodeVersion<br/>
 _Environment:_
 * PATH: contains location of node.exe<br/>
+* $GulpInfo<br/>
+* $GruntInfo<br/>
+* $BowerInfo<br/>
+* $YarnInfo<br/>
 
 > Note: You can install and use another version of Node.js on Microsoft-hosted agent pools using the [Node tool installer](https://docs.microsoft.com/vsts/pipelines/tasks/tool/node-js) task.
 "@

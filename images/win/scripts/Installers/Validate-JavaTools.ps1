@@ -18,14 +18,14 @@ else
 }
 
 
-if( $( $(& $env:comspec "/s /c java -version 2>&1") | Out-String) -match  'java version "(?<version>.*)".*' )
+if( $( $(& $env:comspec "/s /c java -version 2>&1") | Out-String) -match  '^(?<vendor>.+) version "(?<version>.+)".*' )
 {
    $javaVersion = $Matches.version
 }
 
 $env:Path = $env:JAVA_HOME_11_X64 + "\bin;" + $env:Path
 
-if( $( $(& $env:comspec "/s /c java -version 2>&1") | Out-String) -match  'java version "(?<version>.*)".*' )
+if( $( $(& $env:comspec "/s /c java -version 2>&1") | Out-String) -match  '^(?<vendor>.+) version "(?<version>.+)".*' )
 {
    $java11Version = $Matches.version
 }

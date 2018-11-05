@@ -10,18 +10,19 @@ source $HELPER_SCRIPTS/document.sh
 
 DEFAULT_JDK_VERSION=8
 
-# Install Java OpenJDKs, fast
-apt-add-repository -y ppa:openjdk-r/ppa
-apt-get update
-apt-fast install -y --no-install-recommends openjdk-7-jdk openjdk-8-jdk openjdk-9-jdk openjdk-10-jdk openjdk-11-jdk
-update-alternatives --set java /usr/lib/jvm/java-"${DEFAULT_JDK_VERSION}"-openjdk-amd64/jre/bin/java
-
-echo "JAVA_HOME_7_X64=/usr/lib/jvm/java-7-openjdk-amd64" | tee -a /etc/environment
-echo "JAVA_HOME_8_X64=/usr/lib/jvm/java-8-openjdk-amd64" | tee -a /etc/environment
-echo "JAVA_HOME_9_X64=/usr/lib/jvm/java-9-openjdk-amd64" | tee -a /etc/environment
-echo "JAVA_HOME_10_X64=/usr/lib/jvm/java-10-openjdk-amd64" | tee -a /etc/environment
-echo "JAVA_HOME_11_X64=/usr/lib/jvm/java-11-openjdk-amd64" | tee -a /etc/environment
-echo "JAVA_HOME=/usr/lib/jvm/java-${DEFAULT_JDK_VERSION}-openjdk-amd64" | tee -a /etc/environment
+#Install Azul jdks
+#Documentation for Azul JDK installation can be found here: https://www.azul.com/downloads/azure-only/zulu/
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9
+apt-add-repository "deb http://repos.azul.com/azure-only/zulu/apt stable main"
+apt-get -q update
+apt-get -y install zulu-7-azure-jdk=\*
+apt-get -y install zulu-8-azure-jdk=\*
+apt-get -y install zulu-11-azure-jdk=\*
+update-java-alternatives -s /usr/lib/jvm/zulu-8-azure-amd64
+echo "JAVA_HOME_7_X64=/usr/lib/jvm/zulu-7-azure-amd64" | tee -a /etc/environment
+echo "JAVA_HOME_8_X64=/usr/lib/jvm/zulu-8-azure-amd64" | tee -a /etc/environment
+echo "JAVA_HOME_11_X64=/usr/lib/jvm/zulu-11-azure-amd64" | tee -a /etc/environment
+echo "JAVA_HOME=/usr/lib/jvm/zulu-${DEFAULT_JDK_VERSION}-azure-amd64" | tee -a /etc/environment
 echo "JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8" | tee -a /etc/environment
 
 # Install Ant
@@ -55,11 +56,9 @@ done
 
 # Document what was added to the image
 echo "Lastly, documenting what we added to the metadata file"
-DocumentInstalledItem "OpenJDK (7) ($(/usr/lib/jvm/java-7-openjdk-amd64/bin/java -showversion |& head -n 1))"
-DocumentInstalledItem "OpenJDK (8) ($(/usr/lib/jvm/java-8-openjdk-amd64/bin/java -showversion |& head -n 1))"
-DocumentInstalledItem "OpenJDK (9) ($(/usr/lib/jvm/java-9-openjdk-amd64/bin/java -showversion |& head -n 1))"
-DocumentInstalledItem "OpenJDK (10) ($(/usr/lib/jvm/java-10-openjdk-amd64/bin/java -showversion |& head -n 1))"
-DocumentInstalledItem "OpenJDK (11) ($(/usr/lib/jvm/java-11-openjdk-amd64/bin/java -showversion |& head -n 1))"
+DocumentInstalledItem "Azul JDK (7) ($(/usr/lib/jvm/zulu-7-azure-amd64/bin/java -showversion |& head -n 1))"
+DocumentInstalledItem "Azul JDK (8) ($(/usr/lib/jvm/zulu-8-azure-amd64/bin/java -showversion |& head -n 1))"
+DocumentInstalledItem "Azul JDK (11) ($(/usr/lib/jvm/zulu-11-azure-amd64/bin/java -showversion |& head -n 1))"
 DocumentInstalledItem "Ant ($(ant -version))"
 DocumentInstalledItem "Gradle ${gradle_version}"
 DocumentInstalledItem "Maven ($(mvn -version | head -n 1))"
