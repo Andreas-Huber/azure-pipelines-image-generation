@@ -4,6 +4,51 @@
 ##  Desc:  Install Azure PowerShell modules
 ################################################################################
 
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+function Download-Zip
+{
+    [CmdletBinding()]
+    Param(
+        [Parameter(
+            Mandatory = $true
+        )]
+        [string]
+        $BlobUri
+    )
+
+    Write-Host "Downloading the zip from blob: '$BlobUri'"
+    $fileName = "azureps_" + "$(Get-Random)" + ".zip"
+    $targetLocation = Join-Path $ENV:Temp -ChildPath $fileName
+    Write-Host "Download target location: '$targetLocation'"
+    $webClient = New-Object Net.WebClient
+    $null = $webClient.DownloadFile($BlobUri, $targetLocation)
+    Write-Host "Download complete. Target Location: '$targetLocation'"
+    return $targetLocation
+}
+
+function Extract-Zip
+{
+    [CmdletBinding()]
+    Param(
+        [Parameter(
+            Mandatory = $true
+        )]
+        [string]
+        $ZipFilePath,
+
+        [Parameter(
+            Mandatory = $true
+        )]
+        [string]
+        $TargetLocation
+    )
+
+    Write-Host "Expanding the Zip File: '$ZipFilePath'. Target: '$TargetLocation'"
+    $null = [System.IO.Compression.ZipFile]::ExtractToDirectory($ZipFilePath, $TargetLocation)
+    Write-Host "Extraction completed successfully."
+}
+
 Set-PSRepository -InstallationPolicy Trusted -Name PSGallery
 # First ensure that only Azure PowerShell version 2.1.0 is installed
 
@@ -198,17 +243,14 @@ else {
 }
 
 # Download and unzip the stored AzurePSModules from the vstsagentools public blob
-
-$blobUri = "https://vstsagenttools.blob.core.windows.net/tools/azurepowershellmodules/AzurePSModules.m139.20180816.32798.zip"
-$downloadLocation = "${ENV:Temp}\AzurePSModules.zip"
 $extractLocation = "C:\Modules"
+$azurePsUri = @(
+    "https://vstsagenttools.blob.core.windows.net/tools/azurepowershellmodules/AzPSModules.M151.20190418.18144.zip",
+    "https://vstsagenttools.blob.core.windows.net/tools/azurepowershellmodules/AzurePSModules.M151.20190415.40979.zip"
+)
 
-Write-Host "Downloading content from blob location $blobUri"
-$webClient = New-Object Net.WebClient
-$webClient.DownloadFile($blobUri, $downloadLocation)
-
-Write-Host "Unzipping Azure modules to folder $extractLocation"
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-[System.IO.Compression.ZipFile]::ExtractToDirectory($downloadLocation, $extractLocation)
-
-Write-Host "Successfully unzipped modules to location $extractLocation"
+foreach ($uri in $azurePsUri)
+{
+    $targetFile = Download-Zip -BlobUri $uri
+    Extract-Zip -ZipFilePath $targetFile -TargetLocation $extractLocation
+}

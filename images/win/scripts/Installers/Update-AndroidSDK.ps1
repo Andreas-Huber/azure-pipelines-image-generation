@@ -4,18 +4,29 @@
 ##  Desc:  Install and update Android SDK and tools
 ################################################################################
 
-# Get the latest command line tools so we can accept all of the licenses.  Alternatively we could just upload them.
-# https://developer.android.com/studio/index.html
-Invoke-WebRequest -UseBasicParsing -Uri "https://dl.google.com/android/repository/sdk-tools-windows-3859397.zip" -OutFile android-sdk-tools.zip
+# Download the latest command line tools so that we can accept all of the licenses.
+# See https://developer.android.com/studio/#command-tools
+Invoke-WebRequest -UseBasicParsing -Uri "https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip" -OutFile android-sdk-tools.zip
 
 # Don't replace the one that VS installs as it seems to break things.
 Expand-Archive -Path android-sdk-tools.zip -DestinationPath android-sdk -Force
 
 $sdk = Get-Item -Path .\android-sdk
 
-# Accept the standard licenses.  There does not appear to be an easy way to do this
-# so we are base64 encoding a zip of the lincenses directory from another installation
-$base64Content = "UEsDBBQAAAAIAPieZ0uamkPzKgAAACoAAAAhAAAAbGljZW5zZXNcYW5kcm9pZC1nb29nbGV0di1saWNlbnNlBcHRDQAwBAXA/ybdBQ9lHcL+I/Tunu1Un1gBLwZsWUv12s06RbtkEAB9UEsDBBQAAAAIAPmeZ0tHbeedKwAAACoAAAAcAAAAbGljZW5zZXNcYW5kcm9pZC1zZGstbGljZW5zZQXByQ0AIAwDsD8SuxDRi3FaaPYfAXuOp0ZFuPgRRWdxgeWRtMdb2EiTQH9QSwMEFAAAAAgA+p5nS5ECY7AsAAAAKgAAACQAAABsaWNlbnNlc1xhbmRyb2lkLXNkay1wcmV2aWV3LWxpY2Vuc2Xj5TI1MDEzM08zSTZISTVPTDNMNDBLSbVMM0kyNDcyT7IwMTY1TDOyNDQAAFBLAwQUAAAACAD7nmdLk6vQKCwAAAAqAAAAGwAAAGxpY2Vuc2VzXGdvb2dsZS1nZGstbGljZW5zZePlMjZOMks0SjIzMTMwTzM0TDI3tUwzNjJITbNMSUszSUw1TTYxT7E0TwQAUEsDBBQAAAAIAPyeZ0usTeMRLAAAACoAAAAkAAAAbGljZW5zZXNcaW50ZWwtYW5kcm9pZC1leHRyYS1saWNlbnNl4+VKsTQ3TTM3NTSztEg0N08yMzNKMzQyNUlJSUpNTTG2NDBMtTQ3SzNNBABQSwMEFAAAAAgA/Z5nS+2ee/8sAAAAKgAAACYAAABsaWNlbnNlc1xtaXBzLWFuZHJvaWQtc3lzaW1hZ2UtbGljZW5zZePlMjNOMTcwTjM1szRKS7GwNEwxTUxOTE5LSrFINbBMMzFIS7Y0NzM0MAUAUEsBAhQAFAAAAAgA+J5nS5qaQ/MqAAAAKgAAACEAAAAAAAAAAAAAAAAAAAAAAGxpY2Vuc2VzXGFuZHJvaWQtZ29vZ2xldHYtbGljZW5zZVBLAQIUABQAAAAIAPmeZ0tHbeedKwAAACoAAAAcAAAAAAAAAAAAAAAAAGkAAABsaWNlbnNlc1xhbmRyb2lkLXNkay1saWNlbnNlUEsBAhQAFAAAAAgA+p5nS5ECY7AsAAAAKgAAACQAAAAAAAAAAAAAAAAAzgAAAGxpY2Vuc2VzXGFuZHJvaWQtc2RrLXByZXZpZXctbGljZW5zZVBLAQIUABQAAAAIAPueZ0uTq9AoLAAAACoAAAAbAAAAAAAAAAAAAAAAADwBAABsaWNlbnNlc1xnb29nbGUtZ2RrLWxpY2Vuc2VQSwECFAAUAAAACAD8nmdLrE3jESwAAAAqAAAAJAAAAAAAAAAAAAAAAAChAQAAbGljZW5zZXNcaW50ZWwtYW5kcm9pZC1leHRyYS1saWNlbnNlUEsBAhQAFAAAAAgA/Z5nS+2ee/8sAAAAKgAAACYAAAAAAAAAAAAAAAAADwIAAGxpY2Vuc2VzXG1pcHMtYW5kcm9pZC1zeXNpbWFnZS1saWNlbnNlUEsFBgAAAAAGAAYA2gEAAH8CAAAAAA=="
+# Install the standard Android SDK licenses. In the past, there wasn't a better way to do this,
+# so we are base64-encoding a zip of the licenses directory from another installation.
+# To create this base64 string, create a zip file that contains nothing but a 'licenses' folder,
+# which folder contains the accepted license files found in 'C:\Program Files (x86)\Android\android-sdk\licenses'.
+# Then, run this in PowerShell:
+#     $LicensesZipFileName = 'C:\Program Files (x86)\Android\android-sdk\Licenses.zip'
+#     $base64Content = [Convert]::ToBase64String([IO.File]::ReadAllBytes($LicensesZipFileName))
+#     echo $base64Content
+#
+# Future: see if the base64 technique can be avoided by running this PowerShell script to accept all licenses.
+# This fails when run on a live agent, likely because non-interactive mode is set.
+# It may work fine during image generation (this script).
+#     for($i=0; $i -lt 100; $i++) { $response += "y`n"}; $response | .\sdkmanager.bat --licenses
+$base64Content = "UEsDBBQAAAAAAKJeN06amkPzKgAAACoAAAAhAAAAbGljZW5zZXMvYW5kcm9pZC1nb29nbGV0di1saWNlbnNlDQpmYzk0NmU4ZjIzMWYzZTMxNTliZjBiN2M2NTVjOTI0Y2IyZTM4MzMwUEsDBBQAAAAIAKBrN05E+YSqQwAAAFQAAAAcAAAAbGljZW5zZXMvYW5kcm9pZC1zZGstbGljZW5zZQXByREAIQgEwP9WmYsjhxgOKJN/CNs9vmdOQ2zdRw2dxQnWjqQ/3oIgXQM9vqUiwkiX8ljWea4ZlCF3xTo1pz6w+wdQSwMEFAAAAAAAxV43TpECY7AqAAAAKgAAACQAAABsaWNlbnNlcy9hbmRyb2lkLXNkay1wcmV2aWV3LWxpY2Vuc2UNCjUwNDY2N2Y0YzBkZTdhZjFhMDZkZTlmNGIxNzI3Yjg0MzUxZjI5MTBQSwMEFAAAAAAAzF43TpOr0CgqAAAAKgAAABsAAABsaWNlbnNlcy9nb29nbGUtZ2RrLWxpY2Vuc2UNCjMzYjZhMmI2NDYwN2YxMWI3NTlmMzIwZWY5ZGZmNGFlNWM0N2Q5N2FQSwMEFAAAAAAAz143TqxN4xEqAAAAKgAAACQAAABsaWNlbnNlcy9pbnRlbC1hbmRyb2lkLWV4dHJhLWxpY2Vuc2UNCmQ5NzVmNzUxNjk4YTc3YjY2MmYxMjU0ZGRiZWVkMzkwMWU5NzZmNWFQSwMEFAAAAAAA0l43Tu2ee/8qAAAAKgAAACYAAABsaWNlbnNlcy9taXBzLWFuZHJvaWQtc3lzaW1hZ2UtbGljZW5zZQ0KNjNkNzAzZjU2OTJmZDg5MWQ1YWNhY2ZiZDhlMDlmNDBmYzk3NjEwNVBLAQIUABQAAAAAAKJeN06amkPzKgAAACoAAAAhAAAAAAAAAAEAIAAAAAAAAABsaWNlbnNlcy9hbmRyb2lkLWdvb2dsZXR2LWxpY2Vuc2VQSwECFAAUAAAACACgazdORPmEqkMAAABUAAAAHAAAAAAAAAABACAAAABpAAAAbGljZW5zZXMvYW5kcm9pZC1zZGstbGljZW5zZVBLAQIUABQAAAAAAMVeN06RAmOwKgAAACoAAAAkAAAAAAAAAAEAIAAAAOYAAABsaWNlbnNlcy9hbmRyb2lkLXNkay1wcmV2aWV3LWxpY2Vuc2VQSwECFAAUAAAAAADMXjdOk6vQKCoAAAAqAAAAGwAAAAAAAAABACAAAABSAQAAbGljZW5zZXMvZ29vZ2xlLWdkay1saWNlbnNlUEsBAhQAFAAAAAAAz143TqxN4xEqAAAAKgAAACQAAAAAAAAAAQAgAAAAtQEAAGxpY2Vuc2VzL2ludGVsLWFuZHJvaWQtZXh0cmEtbGljZW5zZVBLAQIUABQAAAAAANJeN07tnnv/KgAAACoAAAAmAAAAAAAAAAEAIAAAACECAABsaWNlbnNlcy9taXBzLWFuZHJvaWQtc3lzaW1hZ2UtbGljZW5zZVBLBQYAAAAABgAGANoBAACPAgAAAAA="
 $content = [System.Convert]::FromBase64String($base64Content)
 Set-Content -Path .\android-sdk-licenses.zip -Value $content -Encoding Byte
 Expand-Archive -Path .\android-sdk-licenses.zip -DestinationPath 'C:\Program Files (x86)\Android\android-sdk' -Force
@@ -26,7 +37,7 @@ Expand-Archive -Path .\android-sdk-licenses.zip -DestinationPath 'C:\Program Fil
 
 $sdk_root = "C:\Program Files (x86)\Android\android-sdk"
 
-#NDK is installed by VS
+# The NDK is installed by Visual Studio at this location:
 $ndk_root = "C:\Microsoft\AndroidNDK64\"
 
 if(Test-Path $ndk_root){
@@ -57,22 +68,33 @@ Push-Location -Path $sdk.FullName
     "platforms;android-22" `
     "platforms;android-21" `
     "platforms;android-19" `
-    "platforms;android-17" `
-    "platforms;android-15" `
-    "platforms;android-10" `
+    "build-tools;28.0.3" `
+    "build-tools;28.0.2" `
+    "build-tools;28.0.1" `
     "build-tools;28.0.0" `
     "build-tools;27.0.3" `
+    "build-tools;27.0.2" `
     "build-tools;27.0.1" `
+    "build-tools;27.0.0" `
     "build-tools;26.0.3" `
+    "build-tools;26.0.2" `
     "build-tools;26.0.1" `
+    "build-tools;26.0.0" `
     "build-tools;25.0.3" `
+    "build-tools;25.0.2" `
+    "build-tools;25.0.1" `
+    "build-tools;25.0.0" `
     "build-tools;24.0.3" `
+    "build-tools;24.0.2" `
+    "build-tools;24.0.1" `
+    "build-tools;24.0.0" `
     "build-tools;23.0.3" `
+    "build-tools;23.0.2" `
     "build-tools;23.0.1" `
     "build-tools;22.0.1" `
     "build-tools;21.1.2" `
+    "build-tools;20.0.0" `
     "build-tools;19.1.0" `
-    "build-tools;17.0.0" `
     "extras;android;m2repository" `
     "extras;google;m2repository" `
     "extras;google;google_play_services" `
@@ -88,7 +110,6 @@ Push-Location -Path $sdk.FullName
     "patcher;v4"
 
 Pop-Location
-
 
 
 # Adding description of the software to Markdown

@@ -21,7 +21,7 @@ Function InstallMSI
         Write-Host "Downloading $MsiName..."
         $FilePath = "${env:Temp}\$MsiName"
 
-        Invoke-WebRequest -Uri $MsiUrl -OutFile $FilePath 
+        Invoke-WebRequest -Uri $MsiUrl -OutFile $FilePath
 
         $Arguments = ('/i', $FilePath, '/QN', '/norestart' )
 
@@ -55,10 +55,8 @@ $SharedManagementObjectsExitCode = InstallMSI -MsiUrl "https://download.microsof
 
 $PowerShellToolsExitCode = InstallMSI -MsiUrl "https://download.microsoft.com/download/8/7/2/872BCECA-C849-4B40-8EBE-21D48CDF1456/ENU/x64/PowerShellTools.msi" -MsiName "PowerShellTools.msi"
 
-# Validate the installation
-$env:PSModulePath = Get-SystemVariable "PSModulePath"
-$modules = Get-Module -Name SQLPS -ListAvailable
-Write-Host "The SQLPS Modules present are:"
-$modules | Select-Object Name,Version,Path | Format-Table
+# install sqlserver PS module
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-Module -Name SqlServer -AllowClobber
 
 exit $PowerShellToolsExitCode

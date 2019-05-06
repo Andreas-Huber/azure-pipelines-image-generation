@@ -15,7 +15,8 @@ Write-Host "Clean up various directories"
     "$env:windir\\logs",
     "$env:windir\\winsxs\\manifestcache",
     "$env:windir\\Temp",
-    "$env:windir\\Installer"
+    "$env:windir\\Installer",
+    "$env:TEMP"
 ) | ForEach-Object {
     if (Test-Path $_) {
         Write-Host "Removing $_"

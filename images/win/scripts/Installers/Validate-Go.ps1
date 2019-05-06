@@ -20,7 +20,7 @@ function Get-GoVersion
     }
 
     Write-Host "Unable to determine Go version at " + $goRootPath
-    exit 1
+    return ""
 }
 
 # Verify that go.exe is on the path
@@ -34,24 +34,38 @@ else
     exit 1
 }
 
-# Get available versions of Go
-$goVersion1_9 = Get-GoVersion -goRootPath "C:\Go1.9.4"
-$goVersionOnPath = Get-GoVersion -goRootPath "C:\Go1.10"
-
 # Add details of available versions in Markdown
-$SoftwareName = "Go (x64)"
-$Description = @"
-#### $goVersion1_9
+$tmplMark = @"
+#### {0}
 
 _Environment:_
-* GOROOT_1_9_X64: root directory of the Go $goVersion1_9 installation
+* {1}: root directory of the Go {0} installation
 
-#### $goVersionOnPath
-
-_Environment:_
-* PATH: contains the location of go.exe version $goVersionOnPath
-* GOROOT: root directory of the Go $goVersionOnPath installation
-* GOROOT_1_10_X64: root directory of the Go $goVersionOnPath installation
 "@
 
-Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $Description
+$tmplMarkRoot = @"
+#### {0}
+
+_Environment:_
+* PATH: contains the location of go.exe version {0}
+* GOROOT: root directory of the Go {0} installation
+* {1}: root directory of the Go {0} installation
+"@
+
+$SoftwareName = "Go (x64)"
+$Description = New-Object System.Text.StringBuilder
+$goVersionsToInstall = $env:GO_VERSIONS.split(",")
+
+foreach($go in $goVersionsToInstall) {
+    $goVersion = Get-GoVersion -goRootPath "C:\Go${go}"
+    $goVersionTag = "GOROOT_{0}_{1}_X64" -f $go.split(".")
+    if ($goVersion -eq $go) {
+        if($go -eq $env:GO_DEFAULT) {
+            $null = $Description.AppendLine(($tmplMarkRoot -f $goVersion, $goVersionTag))
+        } else {
+            $null = $Description.AppendLine(($tmplMark -f $goVersion, $goVersionTag))
+        }
+    }
+}
+
+Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $Description.ToString()

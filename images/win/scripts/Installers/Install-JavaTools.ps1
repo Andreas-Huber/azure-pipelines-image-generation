@@ -4,9 +4,10 @@
 ##  Desc:  Install various JDKs and java tools
 ################################################################################
 
-## Downloading azul jdks
-$azulJDK8Uri = 'https://repos.azul.com/azure-only/zulu/packages/zulu-8/8u181/zulu-8-azure-jdk_8.31.0.2-8.0.181-win_x64.zip'
-$azulJDK11Uri = 'https://repos.azul.com/azure-only/zulu/packages/zulu-11/11.0.1/zulu-11-azure-jdk_11.2.3-11.0.1-win_x64.zip'
+# Download the Azul Systems Zulu JDKs
+# See https://www.azul.com/downloads/azure-only/zulu/
+$azulJDK8Uri = 'https://repos.azul.com/azure-only/zulu/packages/zulu-8/8u212/zulu-8-azure-jdk_8.38.0.13-8.0.212-win_x64.zip'
+$azulJDK11Uri = 'https://repos.azul.com/azure-only/zulu/packages/zulu-11/11.0.3/zulu-11-azure-jdk_11.31.11-11.0.3-win_x64.zip'
 
 cd $env:TEMP
 
@@ -51,13 +52,13 @@ setx JAVA_HOME $latestJava8Install /M
 setx JAVA_HOME_8_X64 $latestJava8Install /M
 setx JAVA_HOME_11_X64 $latestJava11Install /M
 
-#Install Java Tools
-#Force chocolatey to ignore dependencies on Maven and Ant or else they will download Oracle jdk8
+# Install Java tools
+# Force chocolatey to ignore dependencies on Ant and Maven or else they will download the Oracle JDK
 choco install ant -y -i
 choco install maven -y -i
 choco install gradle -y
 
-#Move maven variables to Machine, they may not be in the environment for this script so we need to read them from the registry.
+# Move maven variables to Machine. They may not be in the environment for this script so we need to read them from the registry.
 $userSid = (Get-WmiObject win32_useraccount -Filter "name = '$env:USERNAME' AND domain = '$env:USERDOMAIN'").SID
 $userEnvironmentKey = 'Registry::HKEY_USERS\' + $userSid + '\Environment'
 
@@ -73,9 +74,7 @@ setx M2_HOME $m2_home /M
 setx M2_REPO $m2_repo /M
 setx MAVEN_OPTS $maven_opts /M
 
-
-
-## Downloading cobertura jars
+# Download cobertura jars
 $uri = 'https://ayera.dl.sourceforge.net/project/cobertura/cobertura/2.1.1/cobertura-2.1.1-bin.zip'
 $coberturaPath = "C:\cobertura-2.1.1"
 

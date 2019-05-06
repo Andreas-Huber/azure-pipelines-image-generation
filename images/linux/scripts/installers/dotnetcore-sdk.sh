@@ -86,5 +86,6 @@ done
 # NuGetFallbackFolder at /usr/share/dotnet/sdk/NuGetFallbackFolder is warmed up by smoke test
 # Additional FTE will just copy to ~/.dotnet/NuGet which provides no benefit on a fungible machine
 echo "DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1" | tee -a /etc/environment
+echo "PATH=\"/home/vsts/.dotnet/tools:$PATH\"" | tee -a /etc/environment
 
 dotnet --info

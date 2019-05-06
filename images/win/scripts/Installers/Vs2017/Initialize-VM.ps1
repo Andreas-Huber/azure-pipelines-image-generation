@@ -47,7 +47,7 @@ else {
     Write-Host "Windows Update key does not exist"
 }
 
-# Insatll Windows .NET Features
+# Install Windows .NET Features
 Install-WindowsFeature -Name NET-Framework-Features -IncludeAllSubFeature
 Install-WindowsFeature -Name NET-Framework-45-Features -IncludeAllSubFeature
 Install-WindowsFeature -Name BITS -IncludeAllSubFeature
@@ -66,6 +66,9 @@ Write-Host "Setting local execution policy"
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope MachinePolicy  -ErrorAction Continue | Out-Null
 Get-ExecutionPolicy -List
 
+Write-Host "Enable long path behavior"
+# See https://docs.microsoft.com/en-us/windows/desktop/fileio/naming-a-file#maximum-path-length-limitation
+Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
 
 Write-Host "Install chocolatey"
 $chocoExePath = 'C:\ProgramData\Chocolatey\bin'
@@ -117,9 +120,9 @@ wmic logicaldisk get size,freespace,caption
 # Adding description of the software to Markdown
 
 $Content = @"
-# VSTS Hosted VS2017 image
+# Azure Pipelines Hosted VS2017 image
 
-The following software is installed on machines in the VSTS **Hosted VS2017** pool.
+The following software is installed on machines in the Azure Pipelines **Hosted VS2017** pool.
 
 Components marked with **\*** have been upgraded since the previous version of the image.
 

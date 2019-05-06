@@ -9,8 +9,10 @@
 source $HELPER_SCRIPTS/document.sh
 source $HELPER_SCRIPTS/apt.sh
 
+source_list=/etc/apt/sources.list.d/eslerlang.list
+
 # Install Erlang
-echo "deb http://binaries.erlang-solutions.com/debian $(lsb_release -cs) contrib" > /etc/apt/sources.list.d/eslerlang.list
+echo "deb http://binaries.erlang-solutions.com/debian $(lsb_release -cs) contrib" > $source_list
 wget -O - http://binaries.erlang-solutions.com/debian/erlang_solutions.asc | apt-key add -
 apt-get update
 apt-get install -y --no-install-recommends esl-erlang
@@ -33,3 +35,6 @@ done
 echo "Lastly, documenting what we added to the metadata file"
 erlang_version="$(erl -version 2>&1 | tr -d '\n' | tr -d '\r')"
 DocumentInstalledItem "Erlang ($erlang_version)"
+
+# Clean up source list
+rm $source_list

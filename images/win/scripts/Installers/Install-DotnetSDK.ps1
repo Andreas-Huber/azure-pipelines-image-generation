@@ -21,7 +21,6 @@ Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -UseBasicParsing 
 $templates = @(
     'console',
     'mstest',
-    'xunit',
     'web',
     'mvc',
     'webapi'
@@ -33,20 +32,23 @@ $dotnetReleases | ForEach-Object {
     if(!(Test-Path -Path "C:\Program Files\dotnet\sdk\$sdkVersion")) {
         Write-Host "Installing dotnet $sdkVersion"
         .\dotnet-install.ps1 -Architecture x64 -Version $sdkVersion -InstallDir $(Join-Path -Path $env:ProgramFiles -ChildPath 'dotnet')
-        # warm up dotnet for first time experience
-        $templates | ForEach-Object {
-            $template = $_
-            $projectPath = Join-Path -Path C:\temp -ChildPath $template
-            New-Item -Path $projectPath -Force -ItemType Directory
-            Push-Location -Path $projectPath
-            & $env:ProgramFiles\dotnet\dotnet.exe new $template
-            Pop-Location
-            Remove-Item $projectPath -Force -Recurse
-        }
     }
     else {
         Write-Host "Sdk version $sdkVersion already installed"
     }
+
+    # warm up dotnet for first time experience
+    $templates | ForEach-Object {
+        $template = $_
+        $projectPath = Join-Path -Path C:\temp -ChildPath $template
+        New-Item -Path $projectPath -Force -ItemType Directory
+        Push-Location -Path $projectPath
+        & $env:ProgramFiles\dotnet\dotnet.exe new globaljson --sdk-version "$sdkVersion"
+        & $env:ProgramFiles\dotnet\dotnet.exe new $template
+        Pop-Location
+        Remove-Item $projectPath -Force -Recurse
+    }
 }
 
 Add-MachinePathItem "C:\Program Files\dotnet"
+Add-MachinePathItem "C:\Users\VssAdministrator\.dotnet\tools"

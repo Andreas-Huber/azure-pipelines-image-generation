@@ -1,4 +1,6 @@
-# Azure Pipelines Hosted image
+# Azure Pipelines Hosted image (preview)
+
+Status: the open source image is not released to the hosted pools. Therefore, it should be considered unsupported, and things may not yet be working. The list of software here mostly matches what's on the deployed VS 2015  pool.
 
 Version 2017.10.01
 

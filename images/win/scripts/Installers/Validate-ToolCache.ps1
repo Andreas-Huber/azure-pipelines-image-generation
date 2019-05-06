@@ -4,63 +4,92 @@
 ##  Desc:  Validate Tool Cache
 ################################################################################
 
-# Python
-$pythonVersions = @(
-    ('2.7.14', 'x86'),
-    ('3.4.4', 'x86'),
-    ('3.5.4', 'x86'),
-    ('3.6.4', 'x86'),
-    ('3.7.0', 'x86')
-    ('2.7.14', 'x64'),
-    ('3.4.4', 'x64'),
-    ('3.5.4', 'x64'),
-    ('3.6.4', 'x64'),
-    ('3.7.0', 'x64')
-)
+# Helpers
+function GetChildFolders {
+    param (
+        [Parameter(Mandatory = $True)]
+        [string]$Path
+    )
+    return Get-ChildItem -Path $Path -Directory -Name
+}
 
-foreach ($version in $pythonVersions)
-{
-    $v = $version[0]
-    $arch = $version[1]
-    $path = "$env:AGENT_TOOLSDIRECTORY\Python\$v\$arch"
-
-    if (Test-Path "$path\python.exe")
+function ToolcacheTest {
+    param (
+        [Parameter(Mandatory = $True)]
+        [string]$SoftwareName,
+        [Parameter(Mandatory = $True)]
+        [string[]]$ExecTests,
+        [Parameter(Mandatory = $True)]
+        [string]$Note
+    )
+    if (Test-Path "$env:AGENT_TOOLSDIRECTORY\$SoftwareName")
     {
-        Write-Host "Python $v ($arch) is successfully installed:"
-        Write-Host (& "$path\python.exe" --version)
+        $description = ""
+        [array]$versions = GetChildFolders -Path "$env:AGENT_TOOLSDIRECTORY\$SoftwareName"
+        if ($versions.count -gt 0){
+            foreach ($version in $versions)
+            {
+                $architectures = GetChildFolders -Path "$env:AGENT_TOOLSDIRECTORY\$SoftwareName\$version"
+
+                Write-Host "$SoftwareName version - $version : $([system.String]::Join(",", $architectures))"
+
+                foreach ($arch in $architectures)
+                {
+                    $path = "$env:AGENT_TOOLSDIRECTORY\$SoftwareName\$version\$arch"
+                    foreach ($test in $ExecTests)
+                    {
+                        if (Test-Path "$path\$test")
+                        {
+                            Write-Host "$SoftwareName($test) $version($arch) is successfully installed:"
+                            Write-Host (& "$path\$test" --version)
+                        }
+                        else
+                        {
+                            Write-Host "$SoftwareName($test) $version ($arch) is not installed"
+                            exit 1
+                        }
+                    }
+
+                    $description += "_Version:_ $version ($arch)<br/>"
+                }
+            }
+
+            $description += $Note
+            Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $description
+        }
+        else
+        {
+            Write-Host "$env:AGENT_TOOLSDIRECTORY\$SoftwareName does not include any folders"
+            exit 1
+        }
     }
     else
     {
-        Write-Host "Python $v ($arch) is not installed"
-        exit 1
-    }
-
-    if (Test-Path "$path\Scripts\pip.exe")
-    {
-        Write-Host "Pip for Python $v ($arch) is successfully installed:"
-        Write-Host (& "$path\Scripts\pip.exe" --version)
-    }
-    else
-    {
-        Write-Host "Pip for Python $v ($arch) is not installed"
+        Write-Host "$env:AGENT_TOOLSDIRECTORY\$SoftwareName does not exist"
         exit 1
     }
 }
 
-# Adding description of the software to Markdown
-$SoftwareName = "Python"
-$Description = ""
-
-foreach ($version in $pythonVersions)
-{
-    $v = $version[0]
-    $arch = $version[1]
-    $Description += "_Version:_ $v ($arch)<br/>"
-}
-
-$Description += @"
+# Python test
+$PythonNote += @"
 <br/>
 > Note: These versions of Python are available through the [Use Python Version](https://go.microsoft.com/fwlink/?linkid=871498) task.
 "@
+$PythonTests = @("python.exe", "Scripts\pip.exe")
+ToolcacheTest -SoftwareName "Python" -ExecTests $PythonTests -Note $PythonNote
 
-Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $Description
+# PyPy test
+$PyPyNote += @"
+<br/>
+> Note: These versions of PyPy are available through the [Use Python Version](https://go.microsoft.com/fwlink/?linkid=871498) task.
+"@
+$PyPyTests = @("python.exe", "bin\pip.exe")
+ToolcacheTest -SoftwareName "PyPy" -ExecTests $PyPyTests -Note $PyPyNote
+
+# Ruby test
+$RubyNote += @"
+<br/>
+> Note: These versions of Ruby are available through the [Use Ruby Version](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/tool/use-ruby-version) task.
+"@
+$RubyTests = @("bin\ruby.exe")
+ToolcacheTest -SoftwareName "Ruby" -ExecTests $RubyTests -Note $RubyNote

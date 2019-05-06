@@ -38,7 +38,7 @@ _Environment:_
 Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $Description
 
 # Adding description of the software to Markdown
-$SoftwareName = "Git LFS"
+$SoftwareName = "Git Large File Storage (LFS)"
 
 $Description = @"
 _Version:_ $gitLfsVersion<br/>

@@ -1,8 +1,8 @@
 ################################################################################
 ##  File:  Validate-Python.ps1
 ##  Team:  CI-X
-##  Desc:  Configure python on path based on what VS installs
-##         Must run after VS is installed
+##  Desc:  Configure python on path based on what is installed in the tools cache
+##         Must run after tools cache is downloaded and validated
 ################################################################################
 
 if(Get-Command -Name 'python')
@@ -11,11 +11,16 @@ if(Get-Command -Name 'python')
 }
 else
 {
-     Write-Host "Python is not on path"
+    Write-Host "Python is not on path"
     exit 1
 }
 
-$Python3Verison = $(python --version)
+$Python3Version = $(python --version)
+
+if ($Python3Version -notlike "Python 3.*")
+{
+    Write-Error "Python 3 is not in the PATH"
+}
 
 $Python2Path = "C:\Python27amd64"
 $env:Path = $Python2Path + ";" + $env:Path
@@ -26,7 +31,7 @@ $Python2Version = & $env:comspec "/s /c python --version 2>&1"
 $SoftwareName = "Python (64 bit)"
 
 $Description = @"
-#### $Python3Verison
+#### $Python3Version
 _Environment:_
 * PATH: contains location of python.exe
 

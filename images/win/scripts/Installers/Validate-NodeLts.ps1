@@ -33,6 +33,7 @@ else
 if( $(node --version) -match  'v(?<version>.*)' )
 {
    $nodeVersion = $Matches.version
+   $nodeArch = $(node -e "console.log(process.arch)")
 }
 
 $npmVersion = $(npm -version)
@@ -46,6 +47,7 @@ $YarnInfo = "Yarn $(yarn -version)"
 
 $Description = @"
 _Version:_ $nodeVersion<br/>
+_Architecture:_ $nodeArch<br/>
 _Environment:_
 * PATH: contains location of node.exe<br/>
 * $GulpInfo<br/>

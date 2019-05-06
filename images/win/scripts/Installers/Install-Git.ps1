@@ -6,7 +6,9 @@
 
 Import-Module -Name ImageHelpers
 
-choco install git -y --package-parameters= "/GitAndUnixToolsOnPath /WindowsTerminal /NoShellIntegration"
+# Install the latest version of Git which is bundled with Git LFS.
+# See https://chocolatey.org/packages/git
+choco install git -y --package-parameters="/GitAndUnixToolsOnPath /WindowsTerminal /NoShellIntegration"
 
 Add-MachinePathItem "C:\Program Files\Git\mingw64\bin"
 Add-MachinePathItem "C:\Program Files\Git\usr\bin"

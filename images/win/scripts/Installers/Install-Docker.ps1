@@ -11,7 +11,7 @@ Write-Host "Install-Module DockerProvider"
 Install-Module DockerMsftProvider -Force
 
 Write-Host "Install-Package Docker"
-Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.03 -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force
 Start-Service docker
 
 choco install docker-compose -y

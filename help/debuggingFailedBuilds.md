@@ -7,21 +7,21 @@ By default, `packer build` will delete the resource group as soon as the build f
 
 When the build fails, you will see this:
 
-![Ask on error screenshot](/docs/resources/askOnError.png "Ask on error screenshot")
+![Ask on error screenshot](/help/resources/askOnError.png "Ask on error screenshot")
 
 ## Step 2: Find the resource group name in the build log
 At the beginning of the build log (written to console), find the resource group name for the VM:
 
-![Resource group from log screenshot](/docs/resources/resourceGroupName.png "Resource group from log screenshot")
+![Resource group from log screenshot](/help/resources/resourceGroupName.png "Resource group from log screenshot")
 
 Log into the Azure Portal.  Find that resource group under `Resource groups`.  You should see the resources for the Packer build:
 
-![Packer resource group in Azure screenshot](/docs/resources/packerResourceGroup.png "Packer resource group in Azure screenshot")
+![Packer resource group in Azure screenshot](/help/resources/packerResourceGroup.png "Packer resource group in Azure screenshot")
 
 ## Step 3: Connect to the VM
 Select the VM in the resource group.  Click `Connect:`
 
 This will download an RDP file.  Open that and enter the credentials found in the JSON file you pass to `packer build`:
 
-![VM credentials screenshot](/docs/resources/vmCredentials.png "VM credentials screenshot")
+![VM credentials screenshot](/help/resources/vmCredentials.png "VM credentials screenshot")
 

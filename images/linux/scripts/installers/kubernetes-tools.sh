@@ -18,11 +18,11 @@ apt-get update
 apt-get install -y kubectl
 
 # Install Helm
-curl -sL https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.3-linux-amd64.tar.gz -o helm-v2.10.0-rc.3-linux-amd64.tar.gz
-tar -zxvf helm-v2.10.0-rc.3-linux-amd64.tar.gz
+curl -sL https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz -o helm-v2.11.0-linux-amd64.tar.gz
+tar -zxvf helm-v2.11.0-linux-amd64.tar.gz
 chmod +x linux-amd64/helm
 mv linux-amd64/helm /usr/local/bin/helm
-rm helm-v2.10.0-rc.3-linux-amd64.tar.gz
+rm helm-v2.11.0-linux-amd64.tar.gz
 
 # Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"

@@ -4,14 +4,14 @@
 ##  Desc:  Install Go
 ################################################################################
 
-Import-Module -Name ImageHelpers
+Import-Module -Name ImageHelpers -Force
 
 function Install-GoVersion
 {
     Param
     (
         [String]$goVersion,
-        [Boolean]$addToDefaultPath
+        [Switch]$addToDefaultPath
     )
 
     # Download the Go zip archive.
@@ -57,17 +57,16 @@ function Install-GoVersion
     return "C:\$newDirName"
 }
 
-# Install Go 1.9.x
-$installDirectory = Install-GoVersion -goVersion '1.9.7' -addToDefaultPath $False
-setx GOROOT_1_9_X64 "$installDirectory" /M
+# Install Go
+$goVersionsToInstall = $env:GO_VERSIONS.split(",")
 
-# Install Go 1.10.x
-$installDirectory = Install-GoVersion -goVersion '1.10.4' -addToDefaultPath $False
-setx GOROOT_1_10_X64 "$installDirectory" /M
-
-# Install Go 1.11.x
-$installDirectory = Install-GoVersion -goVersion '1.11' -addToDefaultPath $True
-setx GOROOT_1_11_X64 "$installDirectory" /M
-
-# Done
-exit 0
+foreach($go in $goVersionsToInstall) {
+    Write-Host "Installing Go ${go}"
+    if($go -eq $env:GO_DEFAULT) {
+        $installDirectory = Install-GoVersion -goVersion $go -addToDefaultPath
+    } else {
+        $installDirectory = Install-GoVersion -goVersion $go
+    }
+    $envName = "GOROOT_{0}_{1}_X64" -f $go.split(".")	
+    setx $envName "$installDirectory" /M
+}

@@ -9,8 +9,11 @@
 source $HELPER_SCRIPTS/document.sh
 source $HELPER_SCRIPTS/apt.sh
 
-# Install Mercurial
-apt-get install -y mercurial
+# Install Mercurial from the mercurial-ppa/releases repository for the latest version.
+# https://www.mercurial-scm.org/wiki/Download
+add-apt-repository ppa:mercurial-ppa/releases -y
+apt-get update
+apt-get install -y --no-install-recommends mercurial
 
 # Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"

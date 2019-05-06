@@ -17,12 +17,13 @@ echo "ANDROID_SDK_ROOT=${ANDROID_SDK_ROOT}" | tee -a /etc/environment
 # ANDROID_HOME is deprecated, but older versions of Gradle rely on it
 echo "ANDROID_HOME=${ANDROID_SDK_ROOT}" | tee -a /etc/environment
 
-#Install Android SDK
+# Download the latest command line tools so that we can accept all of the licenses.
+# See https://developer.android.com/studio/#command-tools
 wget -O android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 unzip android-sdk.zip -d ${ANDROID_ROOT}
 rm -f android-sdk.zip
 
-# Install the following build tools, pass in "y" to accept Licenses
+# Install the following SDKs and build tools, passing in "y" to accept licenses.
 echo "y" | ${ANDROID_ROOT}/tools/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} \
     "ndk-bundle" \
     "platform-tools" \
@@ -38,18 +39,32 @@ echo "y" | ${ANDROID_ROOT}/tools/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} \
     "platforms;android-17" \
     "platforms;android-15" \
     "platforms;android-10" \
+    "build-tools;28.0.3" \
     "build-tools;28.0.2" \
+    "build-tools;28.0.1" \
     "build-tools;28.0.0" \
     "build-tools;27.0.3" \
+    "build-tools;27.0.2" \
     "build-tools;27.0.1" \
+    "build-tools;27.0.0" \
     "build-tools;26.0.3" \
+    "build-tools;26.0.2" \
     "build-tools;26.0.1" \
+    "build-tools;26.0.0" \
     "build-tools;25.0.3" \
+    "build-tools;25.0.2" \
+    "build-tools;25.0.1" \
+    "build-tools;25.0.0" \
     "build-tools;24.0.3" \
+    "build-tools;24.0.2" \
+    "build-tools;24.0.1" \
+    "build-tools;24.0.0" \
     "build-tools;23.0.3" \
+    "build-tools;23.0.2" \
     "build-tools;23.0.1" \
     "build-tools;22.0.1" \
     "build-tools;21.1.2" \
+    "build-tools;20.0.0" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
     "extras;android;m2repository" \
@@ -67,18 +82,18 @@ echo "y" | ${ANDROID_ROOT}/tools/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} \
     "patcher;v4"
 
 # Document what was added to the image
-echo "Lastly, documenting what we added to the metadata file"
-DocumentInstalledItem "Google Repository 58"
-DocumentInstalledItem "Google Play services 49"
+echo "Lastly, document what was added to the metadata file"
+DocumentInstalledItem "Google Repository $(cat ${ANDROID_SDK_ROOT}/extras/google/m2repository/source.properties 2>&1 | grep Pkg.Revision | cut -d '=' -f 2)"
+DocumentInstalledItem "Google Play services $(cat ${ANDROID_SDK_ROOT}/extras/google/google_play_services/source.properties 2>&1 | grep Pkg.Revision | cut -d '=' -f 2)"
 DocumentInstalledItem "Google APIs 24"
 DocumentInstalledItem "Google APIs 23"
 DocumentInstalledItem "Google APIs 22"
 DocumentInstalledItem "Google APIs 21"
-DocumentInstalledItem "CMake 3.6.4111459"
+DocumentInstalledItem "CMake $(ls ${ANDROID_SDK_ROOT}/cmake 2>&1)"
 DocumentInstalledItem "Android Support Repository 47.0.0"
 DocumentInstalledItem "Android Solver for ConstraintLayout 1.0.2"
 DocumentInstalledItem "Android Solver for ConstraintLayout 1.0.1"
-DocumentInstalledItem "Android SDK Platform-Tools 28.0.0"
+DocumentInstalledItem "Android SDK Platform-Tools $(cat ${ANDROID_SDK_ROOT}/platform-tools/source.properties 2>&1 | grep Pkg.Revision | cut -d '=' -f 2)"
 DocumentInstalledItem "Android SDK Platform 28"
 DocumentInstalledItem "Android SDK Platform 27"
 DocumentInstalledItem "Android SDK Platform 26"
@@ -92,20 +107,34 @@ DocumentInstalledItem "Android SDK Platform 17"
 DocumentInstalledItem "Android SDK Platform 15"
 DocumentInstalledItem "Android SDK Platform 10"
 DocumentInstalledItem "Android SDK Patch Applier v4"
+DocumentInstalledItem "Android SDK Build-Tools 28.0.3"
 DocumentInstalledItem "Android SDK Build-Tools 28.0.2"
+DocumentInstalledItem "Android SDK Build-Tools 28.0.1"
 DocumentInstalledItem "Android SDK Build-Tools 28.0.0"
 DocumentInstalledItem "Android SDK Build-Tools 27.0.3"
+DocumentInstalledItem "Android SDK Build-Tools 27.0.2"
 DocumentInstalledItem "Android SDK Build-Tools 27.0.1"
+DocumentInstalledItem "Android SDK Build-Tools 27.0.0"
 DocumentInstalledItem "Android SDK Build-Tools 26.0.3"
+DocumentInstalledItem "Android SDK Build-Tools 26.0.2"
 DocumentInstalledItem "Android SDK Build-Tools 26.0.1"
+DocumentInstalledItem "Android SDK Build-Tools 26.0.0"
 DocumentInstalledItem "Android SDK Build-Tools 25.0.3"
+DocumentInstalledItem "Android SDK Build-Tools 25.0.2"
+DocumentInstalledItem "Android SDK Build-Tools 25.0.1"
+DocumentInstalledItem "Android SDK Build-Tools 25.0.0"
 DocumentInstalledItem "Android SDK Build-Tools 24.0.3"
+DocumentInstalledItem "Android SDK Build-Tools 24.0.2"
+DocumentInstalledItem "Android SDK Build-Tools 24.0.1"
+DocumentInstalledItem "Android SDK Build-Tools 24.0.0"
 DocumentInstalledItem "Android SDK Build-Tools 23.0.3"
+DocumentInstalledItem "Android SDK Build-Tools 23.0.2"
 DocumentInstalledItem "Android SDK Build-Tools 23.0.1"
 DocumentInstalledItem "Android SDK Build-Tools 22.0.1"
 DocumentInstalledItem "Android SDK Build-Tools 21.1.2"
+DocumentInstalledItem "Android SDK Build-Tools 20.0.0"
 DocumentInstalledItem "Android SDK Build-Tools 19.1.0"
 DocumentInstalledItem "Android SDK Build-Tools 17.0.0"
-DocumentInstalledItem "Android NDK 17.1.4828580"
+DocumentInstalledItem "Android NDK $(cat ${ANDROID_SDK_ROOT}/ndk-bundle/source.properties 2>&1 | grep Pkg.Revision | cut -d ' ' -f 3)"
 DocumentInstalledItem "Android ConstraintLayout 1.0.2"
 DocumentInstalledItem "Android ConstraintLayour 1.0.1"

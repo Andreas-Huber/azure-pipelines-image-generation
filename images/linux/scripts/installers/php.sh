@@ -182,6 +182,47 @@ apt-fast install -y --no-install-recommends \
     php7.2-xsl \
     php7.2-zip
 
+# Install php7.3
+apt-fast install -y --no-install-recommends \
+    php7.3 \
+    php7.3-apcu \
+    php7.3-amqp \
+    php7.3-bcmath \
+    php7.3-bz2 \
+    php7.3-cgi \
+    php7.3-cli \
+    php7.3-common \
+    php7.3-curl \
+    php7.3-dba \
+    php7.3-dev \
+    php7.3-enchant \
+    php7.3-fpm \
+    php7.3-gd \
+    php7.3-gmp \
+    php7.3-imap \
+    php7.3-interbase \
+    php7.3-intl \
+    php7.3-json \
+    php7.3-ldap \
+    php7.3-mbstring \
+    php7.3-mysql \
+    php7.3-odbc \
+    php7.3-opcache \
+    php7.3-pgsql \
+    php7.3-phpdbg \
+    php7.3-pspell \
+    php7.3-readline \
+    php7.3-recode \
+    php7.3-snmp \
+    php7.3-soap \
+    php7.3-sqlite3 \
+    php7.3-sybase \
+    php7.3-tidy \
+    php7.3-xml \
+    php7.3-xmlrpc \
+    php7.3-xsl \
+    php7.3-zip
+
 apt-fast install -y --no-install-recommends \
     php-igbinary \
     php-memcache \
@@ -197,7 +238,11 @@ apt-get remove --purge -yq php7.2-dev
 apt-fast install -y --no-install-recommends snmp
 
 # Install composer
-apt-fast install -y composer
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5') { echo 'Installer for Composer verified is verified.'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+sudo mv composer.phar /usr/bin/composer
+php -r "unlink('composer-setup.php');"
 
 # Install phpunit (for PHP)
 wget -q -O phpunit https://phar.phpunit.de/phpunit-7.phar
@@ -206,7 +251,7 @@ mv phpunit /usr/local/bin/phpunit
 
 # Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"
-for cmd in php php5.6 php7.0 php7.1 php7.2 composer phpunit; do
+for cmd in php php5.6 php7.0 php7.1 php7.2 php7.3 composer phpunit; do
     if ! command -v $cmd; then
         echo "$cmd was not installed"
         exit 1
@@ -219,5 +264,6 @@ DocumentInstalledItem "PHP 5.6 ($(php5.6 --version | head -n 1))"
 DocumentInstalledItem "PHP 7.0 ($(php7.0 --version | head -n 1))"
 DocumentInstalledItem "PHP 7.1 ($(php7.1 --version | head -n 1))"
 DocumentInstalledItem "PHP 7.2 ($(php7.2 --version | head -n 1))"
+DocumentInstalledItem "PHP 7.3 ($(php7.3 --version | head -n 1))"
 DocumentInstalledItem "Composer  ($(composer --version))"
 DocumentInstalledItem "PHPUnit ($(phpunit --version))"

@@ -11,7 +11,7 @@ source $HELPER_SCRIPTS/document.sh
 # Install LTS Node.js and related build tools
 curl -sL https://git.io/n-install | bash -s -- -ny -
 ~/n/bin/n lts
-npm install -g bower grunt gulp n parcel-bundler
+npm install -g bower grunt gulp n parcel-bundler typescript
 npm install -g --save-dev webpack webpack-cli
 npm install -g npm
 rm -rf ~/n
@@ -39,6 +39,9 @@ DocumentInstalledItem "Node.js ($(node --version))"
 DocumentInstalledItem "Bower ($(bower --version))"
 DocumentInstalledItem "Grunt ($(grunt --version))"
 DocumentInstalledItem "Gulp ($(gulp --version))"
-DocumentInstalledItem "Webpack ($(webpack --version))"
+DocumentInstalledItem "n ($(n --version))"
 DocumentInstalledItem "Parcel ($(parcel --version))"
+DocumentInstalledItem "TypeScript ($(tsc --version))"
+DocumentInstalledItem "Webpack ($(webpack --version))"
+DocumentInstalledItem "Webpack CLI ($(webpack-cli --version))"
 DocumentInstalledItem "Yarn ($(yarn --version))"
