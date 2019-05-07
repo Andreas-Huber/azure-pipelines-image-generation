@@ -125,6 +125,7 @@
                 "{{template_dir}}/scripts/installers/pollinate.sh",
                 "{{template_dir}}/scripts/installers/powershellcore.sh",
                 "{{template_dir}}/scripts/installers/ruby.sh",
+                "{{template_dir}}/scripts/installers/rust.sh",
                 "{{template_dir}}/scripts/installers/scala.sh",
                 "{{template_dir}}/scripts/installers/sphinx.sh",
                 "{{template_dir}}/scripts/installers/subversion.sh",
