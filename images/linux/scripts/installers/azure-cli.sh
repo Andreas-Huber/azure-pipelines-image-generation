@@ -25,3 +25,7 @@ fi
 
 # Document what was added to the image
 DocumentInstalledItem "Azure CLI ($(az -v | head -n 1))"
+
+# Setup Azure Extension directory
+echo "AZURE_EXTENSION_DIR=/usr/local/lib/azureExtensionDir" | tee -a /etc/environment
+mkdir -p /usr/local/lib/azureExtensionDir

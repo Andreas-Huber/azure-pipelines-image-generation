@@ -23,6 +23,13 @@ if( $( $(& $env:comspec "/s /c java -version 2>&1") | Out-String) -match  '^(?<v
    $javaVersion = $Matches.version
 }
 
+$env:Path = $env:JAVA_HOME_7_X64 + "\bin;" + $env:Path
+
+if( $( $(& $env:comspec "/s /c java -version 2>&1") | Out-String) -match  '^(?<vendor>.+) version "(?<version>.+)".*' )
+{
+   $java7Version = $Matches.version
+}
+
 $env:Path = $env:JAVA_HOME_11_X64 + "\bin;" + $env:Path
 
 if( $( $(& $env:comspec "/s /c java -version 2>&1") | Out-String) -match  '^(?<vendor>.+) version "(?<version>.+)".*' )
@@ -55,6 +62,10 @@ $Description = @"
 _Environment:_
 * JAVA_HOME: location of JDK
 * PATH: contains bin folder of JDK
+
+#### $java7Version
+
+_Location:_ $env:JAVA_HOME_7_X64
 
 #### $java11Version
 

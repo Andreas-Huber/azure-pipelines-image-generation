@@ -70,6 +70,7 @@ $WorkLoads = '--allWorkloads --includeRecommended ' + `
                 '--add Microsoft.Net.Component.4.7.1.SDK ' + `
                 '--add Microsoft.Net.Component.4.7.1.TargetingPack ' + `
                 '--add Microsoft.Net.ComponentGroup.4.7.1.DeveloperTools ' + `
+                '--add Microsoft.Net.ComponentGroup.4.7.2.DeveloperTools ' + `
                 '--add Microsoft.Net.Core.Component.SDK.1x ' + `
                 '--add Microsoft.NetCore.1x.ComponentGroup.Web ' + `
                 '--add Microsoft.VisualStudio.Component.Azure.Storage.AzCopy ' + `
@@ -77,6 +78,8 @@ $WorkLoads = '--allWorkloads --includeRecommended ' + `
                 '--add Microsoft.VisualStudio.Component.VC.140 ' + `
                 '--add Component.Dotfuscator ' + `
                 '--add Microsoft.VisualStudio.Component.VC.ATL ' + `
+                '--add Microsoft.VisualStudio.Component.VC.ATL.ARM ' + `
+                '--add Microsoft.VisualStudio.Component.VC.ATL.ARM64 ' + `
                 '--add Microsoft.VisualStudio.Component.VC.ATLMFC ' + `
                 '--add Microsoft.VisualStudio.Component.VC.ClangC2 ' + `
                 '--add Microsoft.VisualStudio.Component.VC.CLI.Support ' + `
@@ -90,7 +93,7 @@ $WorkLoads = '--allWorkloads --includeRecommended ' + `
                 '--add Component.Android.SDK23 ' + `
                 '--add Microsoft.VisualStudio.Component.TestTools.WebLoadTest ' + `
                 '--add Microsoft.VisualStudio.Web.Mvc4.ComponentGroup ' + `
-                '--add Component.CPython2.x64 ' + `
+                '--add Component.Linux.CMake ' + `
                 '--add Microsoft.Component.PythonTools.UWP ' + `
                 '--remove Component.CPython3.x64 ' + `
                 '--add Microsoft.Component.VC.Runtime.OSSupport ' + `
@@ -114,6 +117,8 @@ $WorkLoads = '--allWorkloads --includeRecommended ' + `
                 '--add Microsoft.Component.Blend.SDK.WPF ' + `
                 '--add Microsoft.Component.VC.Runtime.UCRTSDK ' + `
                 '--add Microsoft.VisualStudio.Component.VC.ATL.Spectre ' + `
+                '--add Microsoft.VisualStudio.Component.VC.ATL.ARM.Spectre ' + `
+                '--add Microsoft.VisualStudio.Component.VC.ATL.ARM64.Spectre ' + `
                 '--add Microsoft.VisualStudio.Component.VC.ATLMFC.Spectre ' + `
                 '--add Microsoft.VisualStudio.Component.Windows10SDK.17134 ' + `
                 '--add Microsoft.VisualStudio.Component.Windows10SDK.17763 ' + `

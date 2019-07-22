@@ -7,7 +7,7 @@
 
 Import-Module -Name ImageHelpers -Force
 
-$python37path = $Env:AGENT_TOOLSDIRECTORY + '/Python/3.7*'
+$python37path = $Env:AGENT_TOOLSDIRECTORY + '/Python/3.7*/x64'
 $pythonDir = Get-Item -Path $python37path
 
 if($pythonDir -is [array])

@@ -7,7 +7,7 @@
 
 Import-Module -Name ImageHelpers -Force
 
-$python36path = $Env:AGENT_TOOLSDIRECTORY + '/Python/3.6*'
+$python36path = $Env:AGENT_TOOLSDIRECTORY + '/Python/3.6*/x64'
 $pythonDir = Get-Item -Path $python36path
 
 if($pythonDir -is [array])

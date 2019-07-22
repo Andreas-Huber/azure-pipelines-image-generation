@@ -7,7 +7,7 @@
 
 if(Get-Command -Name 'python')
 {
-    Write-Host "Python $(python --version) on path"
+    Write-Host "Python $(& python -V 2>&1) on path"
 }
 else
 {
@@ -15,15 +15,18 @@ else
     exit 1
 }
 
-$Python3Version = $(python --version)
+$Python3Version = $(& python -V 2>&1)
 
 if ($Python3Version -notlike "Python 3.*")
 {
     Write-Error "Python 3 is not in the PATH"
 }
 
-$Python2Path = "C:\Python27amd64"
-$env:Path = $Python2Path + ";" + $env:Path
+
+$python2path = $Env:AGENT_TOOLSDIRECTORY + '/Python/2.7*/x64'
+$python2Dir = Get-Item -Path $python2path
+
+$env:Path = $python2Dir.FullName + ";" + $env:Path
 
 $Python2Version = & $env:comspec "/s /c python --version 2>&1"
 

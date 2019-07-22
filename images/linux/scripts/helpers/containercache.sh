@@ -29,14 +29,8 @@ for image in "${images[@]}"; do
 done
 
 ## Add container information to the metadata file
-# echo ""
-# DocumentInstalledItem "Cached container images"
-AddSubTitle "Cached container images"
-
-# while read -r line; do
-#     DocumentInstalledItemIndent "$line"
-# done <<< "$(docker images | tail -n +2 | cut -d' ' -f 1)"
+ DocumentInstalledItem "Cached container images"
 
 while read -r line; do
-    DocumentInstalledItem "$line"
+    DocumentInstalledItemIndent "$line"
 done <<< "$(docker images --digests --format '{{.Repository}}:{{.Tag}} (Digest: {{.Digest}})')"

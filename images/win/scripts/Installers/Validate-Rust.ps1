@@ -6,12 +6,16 @@
 
 if (Get-Command -Name 'rustc')
 {
+    Push-Location -Path $env:UserProfile
+    New-Item -Name ".rustup" -Value "C:\Rust\.rustup" -ItemType Junction
+    New-Item -Name ".cargo" -Value "C:\Rust\.cargo" -ItemType Junction
     $RustcVersion = rustc --version
     Write-Host "$RustcVersion is on the path"
+    Pop-Location
 }
 else
 {
-     Write-Host "rustc is not on the path"
+    Write-Host "rustc is not on the path"
     exit 1
 }
 
@@ -26,8 +30,6 @@ $Description = @"
 _Location:_ $RustPath
 _Environment:_
 * PATH: contains the location of rustc.exe
-* RUSTUP_HOME: contains the location of rustup
-* CARGO_HOME: contains the location of cargo
 "@
 
 Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $Description
